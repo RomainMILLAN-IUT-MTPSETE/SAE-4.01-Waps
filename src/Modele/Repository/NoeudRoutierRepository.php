@@ -61,9 +61,13 @@ class NoeudRoutierRepository extends AbstractRepository
      **/
     public function getVoisins(int $noeudRoutierGid): array
     {
-        $requeteSQL = "SELECT v.voisin AS noeud_routier_gid, v.troncon_gid, v.longueur
-                        FROM voisins v
-                        WHERE v.noeud = :gidTag";
+        $requeteSQL = "SELECT 
+        CASE WHEN noeud = :gidTag THEN voisin ELSE noeud END AS noeud_routier_gid, 
+        voisins.troncon_gid, 
+        voisins.longueur
+        FROM voisins
+        WHERE noeud = :gidTag OR voisin = :gidTag
+        ";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
         $pdoStatement->execute(array(
             "gidTag" => $noeudRoutierGid

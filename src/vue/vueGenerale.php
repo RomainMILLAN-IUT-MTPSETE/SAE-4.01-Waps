@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <title><?= $pagetitle ?></title>
     <link rel="stylesheet" href="../ressources/css/navstyle.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <header class="header">
+        <nav class="nav__container">
+            <a href="" class="nav__logo">
+                <img class="logo" src="../ressources/img/logo.png" alt="logo"/>
+            </a>
+
             <ul>
                 <li>
                     <a href="controleurFrontal.php?action=afficherListe&controleur=utilisateur">Utilisateurs</a>
