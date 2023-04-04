@@ -7,19 +7,19 @@ use Exception;
 
 class UtilisateurRepository extends AbstractRepository
 {
-//    /**
-//     * @return Utilisateur[]
-//     */
-//    public static function getUtilisateurs() : array {
-//        $pdoStatement = ConnexionBaseDeDonnees::getPdo()->query("SELECT * FROM utilisateur");
-//
-//        $utilisateurs = [];
-//        foreach($pdoStatement as $utilisateurFormatTableau) {
-//            $utilisateurs[] = UtilisateurRepository::construire($utilisateurFormatTableau);
-//        }
-//
-//        return $utilisateurs;
-//    }
+    /**
+     * @return Utilisateur[]
+     */
+    public static function getUtilisateurs() : array {
+        $pdoStatement = ConnexionBaseDeDonnees::getPdo()->query("SELECT * FROM utilisateur");
+
+        $utilisateurs = [];
+        foreach($pdoStatement as $utilisateurFormatTableau) {
+            $utilisateurs[] = UtilisateurRepository::construireDepuisTableau($utilisateurFormatTableau);
+        }
+
+        return $utilisateurs;
+    }
 
     public function construireDepuisTableau(array $utilisateurTableau): Utilisateur
     {
@@ -37,7 +37,6 @@ class UtilisateurRepository extends AbstractRepository
 
     public function getNomTable(): string
     {
-        throw new Exception("À vous de créer votre table utilisateur !");
         return 'utilisateur';
     }
 

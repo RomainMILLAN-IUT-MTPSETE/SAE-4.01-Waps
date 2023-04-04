@@ -2,8 +2,6 @@
 
 namespace App\PlusCourtChemin\Configuration;
 
-use Exception;
-
 class Configuration
 {
 
@@ -35,7 +33,7 @@ class Configuration
 
     public static function getAbsoluteURL() : string
     {
-        throw new Exception("URL absolue non renseignée !");
+        return 'http://localhost:8082/SAE-4.01-Waps/web/controleurFrontal.php';
     }
 
 }
