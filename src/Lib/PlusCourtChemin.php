@@ -47,31 +47,18 @@ class PlusCourtChemin {
         $latitudeDepart = $noeud->getLatitude();
         $longitudeArrivee = $noeudRoutierRepository->recupererParClePrimaire($this->noeudRoutierArriveeGid)->getLongitude();
         $latitudeArrivee = $noeudRoutierRepository->recupererParClePrimaire($this->noeudRoutierArriveeGid)->getLatitude();
-        return $this->distanceEntreDeuxPoints($latitudeDepart, $longitudeDepart, $latitudeArrivee, $longitudeArrivee);
+        return $this->distanceEntreDeuxPointsHaversine($latitudeDepart, $longitudeDepart, $latitudeArrivee, $longitudeArrivee);
     }
 
-    function distanceEntreDeuxPoints($lat1, $lon1, $lat2, $lon2) {
-        $rayonTerre = 6371000; 
+    function distanceEntreDeuxPointsHaversine($lat1, $lon1, $lat2, $lon2) {
+        $rayonTerre = 6371; 
         $radLat1 = deg2rad($lat1);
         $radLat2 = deg2rad($lat2);
         $deltaPhi = deg2rad($lat2 - $lat1);
         $deltaLambda = deg2rad($lon2 - $lon1);
-        $a = sin($deltaPhi/2) * sin($deltaPhi/2) + cos($radLat1) * cos($radLat2) * sin($deltaLambda/2) * sin($deltaLambda/2);
-        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        $c = 2 * asin(sqrt(sin($deltaPhi/2) * sin($deltaPhi/2) + cos($radLat1) * cos($radLat2) * sin($deltaLambda/2) * sin($deltaLambda/2)));        
         $distance = $rayonTerre * $c;
         return $distance;
-    }
-
-    private function noeudALaFrontiereDeDistanceMinimale() {
-        $noeudRoutierDistanceMinimaleGid = -1;
-        $distanceMinimale = PHP_INT_MAX;
-        foreach ($this->noeudsALaFrontiere as $noeudRoutierGid => $valeur) {
-            if ($this->distances[$noeudRoutierGid] < $distanceMinimale) {
-                $noeudRoutierDistanceMinimaleGid = $noeudRoutierGid;
-                $distanceMinimale = $this->distances[$noeudRoutierGid];
-            }
-        }
-        return $noeudRoutierDistanceMinimaleGid;
     }
 
 }

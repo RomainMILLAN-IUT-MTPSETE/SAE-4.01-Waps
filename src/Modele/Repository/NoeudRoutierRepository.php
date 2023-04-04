@@ -66,8 +66,7 @@ class NoeudRoutierRepository extends AbstractRepository
         troncon_id AS troncon_gid,
         longueur
         FROM voisins_noeud
-        WHERE noeud_voisin = :gidTag
-        OR noeud_routier = :gidTag;";
+        WHERE noeud_voisin = :gidTag OR noeud_routier = :gidTag;";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
         $pdoStatement->execute(array(
             "gidTag" => $noeudRoutierGid
