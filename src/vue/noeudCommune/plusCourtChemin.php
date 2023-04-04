@@ -1,3 +1,4 @@
+<link rel="text/javascript">
 <form action="" method="post">
     <fieldset>
         <legend>Plus court chemin </legend>

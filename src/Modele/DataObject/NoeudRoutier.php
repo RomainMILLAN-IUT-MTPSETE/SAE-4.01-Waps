@@ -8,12 +8,14 @@ use Exception;
 class NoeudRoutier extends AbstractDataObject
 {
     private array $voisins;
+    private array $latitudeLongitude;
 
     public function __construct(
         private int $gid,
         private string $id_rte500,
     ) {
         $this->voisins = (new NoeudRoutierRepository())->getVoisins($this->getGid());
+        $this->latitudeLongitude = (new NoeudRoutierRepository())->getLatitudeLongitude($this->getGid());
     }
 
     public function getGid(): int
@@ -29,6 +31,14 @@ class NoeudRoutier extends AbstractDataObject
     public function getVoisins(): array
     {
         return $this->voisins;
+    }
+
+    public function getLatitude(): float {
+        return floatval($this->latitudeLongitude["latitude"]);
+    }
+
+    public function getLongitude() : float {
+        return floatval($this->latitudeLongitude["longitude"]);
     }
 
     public function exporterEnFormatRequetePreparee(): array

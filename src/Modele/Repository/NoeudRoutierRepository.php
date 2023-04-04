@@ -61,17 +61,32 @@ class NoeudRoutierRepository extends AbstractRepository
      **/
     public function getVoisins(int $noeudRoutierGid): array
     {
-        $requeteSQL = "SELECT 
-        CASE WHEN noeud = :gidTag THEN voisin ELSE noeud END AS noeud_routier_gid, 
-        voisins.troncon_gid, 
-        voisins.longueur
-        FROM voisins
-        WHERE noeud = :gidTag OR voisin = :gidTag
-        ";
+        $requeteSQL = "SELECT
+        CASE WHEN noeud_voisin = :gidTag THEN noeud_routier ELSE noeud_voisin END AS noeud_routier_gid,
+        troncon_id AS troncon_gid,
+        longueur
+        FROM voisins_noeud
+        WHERE noeud_voisin = :gidTag
+        OR noeud_routier = :gidTag;";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
         $pdoStatement->execute(array(
             "gidTag" => $noeudRoutierGid
         ));
         return $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getLatitudeLongitude(int $noeudRoutierGid): array {
+        $requeteSQL = "SELECT 
+        ST_Y(ST_AsText(geom)) AS latitude,
+        ST_X(ST_AsText(geom)) AS longitude
+        FROM geom_noeud_routier
+        WHERE gid = :gidTag";
+        $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
+        $pdoStatement->execute(array(
+            "gidTag" => $noeudRoutierGid
+        ));
+        $tab = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+        return $tab[0];
+    }
+
 }
