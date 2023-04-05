@@ -4,6 +4,7 @@ namespace App\PlusCourtChemin\Modele\Repository;
 
 use App\PlusCourtChemin\Modele\DataObject\AbstractDataObject;
 use App\PlusCourtChemin\Modele\DataObject\NoeudCommune;
+use PDO;
 
 class NoeudCommuneRepository extends AbstractRepository
 {
@@ -48,6 +49,17 @@ class NoeudCommuneRepository extends AbstractRepository
     public function ajouter(AbstractDataObject $object): bool
     {
         return false;
+    }
+
+    public function getNomsCommunes(): array{
+        $requeteSQL = "SELECT nom_comm FROM noeud_commune";
+        $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
+        $pdoStatement->execute();
+        $res = [];
+        foreach ($pdoStatement as $item) {
+            $res[] = $item[0];
+        }
+        return $res;
     }
 
 }
