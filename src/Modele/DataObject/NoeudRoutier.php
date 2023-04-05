@@ -18,18 +18,15 @@ class NoeudRoutier extends AbstractDataObject
         $this->latitudeLongitude = (new NoeudRoutierRepository())->getLatitudeLongitude($this->getGid());
     }
 
-    public function getGid(): int
-    {
+    public function getGid(): int {
         return $this->gid;
     }
 
-    public function getId_rte500(): string
-    {
+    public function getId_rte500(): string {
         return $this->id_rte500;
     }
 
-    public function getVoisins(): array
-    {
+    public function getVoisins(): array {
         return $this->voisins;
     }
 

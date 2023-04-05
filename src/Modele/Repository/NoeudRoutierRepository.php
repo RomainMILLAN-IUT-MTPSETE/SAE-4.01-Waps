@@ -63,9 +63,10 @@ class NoeudRoutierRepository extends AbstractRepository
     {
         $requeteSQL = "SELECT
         CASE WHEN noeud_voisin = :gidTag THEN noeud_routier ELSE noeud_voisin END AS noeud_routier_gid,
-        troncon_id AS troncon_gid,
+        CASE WHEN noeud_voisin = :gidTag THEN noeud_routier_latitude ELSE noeud_voisin_latitude END AS latitude,
+        CASE WHEN noeud_voisin = :gidTag THEN noeud_routier_longitude ELSE noeud_voisin_longitude END AS longitude,
         longueur
-        FROM voisins_noeud
+        FROM voisins
         WHERE noeud_voisin = :gidTag OR noeud_routier = :gidTag;";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
         $pdoStatement->execute(array(
