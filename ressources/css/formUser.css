@@ -1,0 +1,43 @@
+.form-user {
+    width: 35%;
+    margin: auto;
+}
+.form-user-title{
+    font-size: 35px;
+    text-align: center;
+    font-weight: normal;
+}
+.form-user .InputUser-div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+.form-user .InputUser-item{
+    font-weight: lighter;
+}
+.form-user .InputUser-field{
+    height: 30px;
+    background-color: #EBEBEB;
+    border: 0;
+    border-radius: 5px;
+}
+.form-user .InputUser-submit{
+    background-color: #744FC6;
+    font-size: 15px;
+    display: block;
+    margin: auto;
+    margin-top: 15%;
+    width: 150px;
+    color: white;
+    font-weight: lighter;
+    height: 30px;
+    border: 0;
+    border-radius: 5px;
+}
+.form-user .form-user-a-link{
+    margin-top: 0px;
+    text-decoration: none;
+    font-size: 12px;
+    color: black;
+}
