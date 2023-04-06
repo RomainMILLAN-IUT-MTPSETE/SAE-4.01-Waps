@@ -33,10 +33,7 @@
                 $loginHTML = htmlspecialchars(ConnexionUtilisateur::getLoginUtilisateurConnecte());
                 $loginURL = rawurlencode(ConnexionUtilisateur::getLoginUtilisateurConnecte());
                 echo <<<HTML
-                    <a href="controleurFrontal.php?action=afficherDetail&controleur=utilisateur&login=$loginURL">
-                            Profil
-                    </a>
-                    <a href="controleurFrontal.php?action=deconnecter&controleur=utilisateur"><button class="nav_button">Deconnexion</button></a>
+                    <a href="controleurFrontal.php?action=afficherDetail&controleur=utilisateur&login=$loginURL"><button class="nav_button">Mon Profil</button></a>
                 HTML;
             }
             ?>
