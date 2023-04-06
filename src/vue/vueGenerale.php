@@ -19,7 +19,7 @@
         <nav class="nav__container">
             <a class="nav_a" href="controleurFrontal.php?action=plusCourtChemin&controleur=noeudCommune">Accueil</a>
             <a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=noeudCommune">Communes</a>
-            <a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=utilisateur">Utilisateurs</a>
+            <!--<a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=utilisateur">Utilisateurs</a>-->
 
             <?php
 
@@ -33,12 +33,11 @@
                 $loginHTML = htmlspecialchars(ConnexionUtilisateur::getLoginUtilisateurConnecte());
                 $loginURL = rawurlencode(ConnexionUtilisateur::getLoginUtilisateurConnecte());
                 echo <<<HTML
-                    <a href="controleurFrontal.php?action=deconnecter&controleur=utilisateur"><button class="nav_button">Deconnexion</button></a>
                     <a href="controleurFrontal.php?action=afficherDetail&controleur=utilisateur&login=$loginURL">
-                            <img alt="user" src="../ressources/img/user.png" width="18">
-                            $loginHTML
-                        </a>
-                    HTML;
+                            Profil
+                    </a>
+                    <a href="controleurFrontal.php?action=deconnecter&controleur=utilisateur"><button class="nav_button">Deconnexion</button></a>
+                HTML;
             }
             ?>
         </nav>
