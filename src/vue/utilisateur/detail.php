@@ -16,5 +16,6 @@ $loginURL = rawurlencode($login);
     <?php if (ConnexionUtilisateur::estUtilisateur($login) || ConnexionUtilisateur::estAdministrateur()) { ?>
     <a href="controleurFrontal.php?action=afficherFormulaireMiseAJour&controleur=utilisateur&login=<?= $loginURL ?>">(mettre à jour)</a>
     <a href="controleurFrontal.php?action=supprimer&controleur=utilisateur&login=<?= $loginURL ?>">(supprimer)</a>
+        <a href="controleurFrontal.php?action=deconnecter&controleur=utilisateur&login=<?= $loginURL ?>">(deconnection)</a>
     <?php } ?>
 </p>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Waps - <?= $pagetitle ?></title>
     <link rel="stylesheet" href="../ressources/css/main.css">
-    <link rel="stylesheet" href="../ressources/css/bootstrap.css">
+    <link rel="stylesheet" href="../ressources/css/boostrap.css">
     <link rel="stylesheet" href="../ressources/css/footer.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
@@ -40,6 +40,9 @@
         </nav>
     </header>
     <div>
+        <div class="alert alert-success">
+            Connexion effectuée.
+        </div>
         <?php
         foreach (["success", "info", "warning", "danger"] as $type) {
             foreach ($messagesFlash[$type] as $messageFlash) {
