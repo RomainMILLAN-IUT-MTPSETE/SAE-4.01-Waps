@@ -1,0 +1,33 @@
+body{
+    background-color: #FCF8FF;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 35px;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.header .logo {
+    height: 25px;
+}
+
+
+.nav_a{
+    text-decoration: none;
+    color: black;
+    font-size: 17.5px;
+    margin-right: 15px;
+}
+.nav_button{
+    background-color: #744FC6;
+    border-radius: 5px;
+    border: 0;
+    height: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: white;
+}
