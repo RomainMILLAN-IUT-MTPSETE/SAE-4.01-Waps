@@ -1,61 +1,33 @@
-body{
-    font-family: Poppins, sans-serif;
+.acceuil-container{
+    padding-top: 10%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #FCF8FF;
-
+.acceuil-logo {
+    width: 40%;
+}
+.acceuil-logo img{
+    display: block;
+    margin: auto;
+}
+.acceuil-logo p {
+    font-size: 25px;
+    text-align: center;
 }
 
-.logo2{
-    width: 100px;
+.acceuil-txt{
+    width: 40%;
+}
+.acceuil-txt p {
+    font-size: 20px;
 }
 
-.connect{
-    background-color: #744FC6;
-    color: #fff;
-    border: none;
-    border-radius: 7px;
-
-}
-
-
-nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-ul {
-    display: flex;
-    list-style-type: none;
-    align-items: center;
-}
-
-li {
-    margin-right: 20px;
-}
-
-a {
-    color: #444;
+a{
     text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
 }
-
-
-
-main {
-    padding-top: 200px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
 .bouton-decouverte {
     display: block;
     margin: 30px auto;
@@ -66,40 +38,4 @@ main {
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
-}
-.main-container{
-
-    padding-left: 15%;
-    display:flex;
-    flex-direction: row;
-
-
-}
-
-.alert {
-    padding: 10px;
-    margin: 20px;
-    border-radius: 5px;
-    font-size: 25px;
-}
-
-
-#div1 {
-    padding-top: 5%;
-    display: flex;
-    flex-direction: column;
-
-    padding-right: 15%;
-
-    font-size:32px;
-
-
-}
-
-#div2 {
-    display: flex;
-    flex-direction: column;
-    max-width: 30%;
-    font-size: 25px;
-
 }
