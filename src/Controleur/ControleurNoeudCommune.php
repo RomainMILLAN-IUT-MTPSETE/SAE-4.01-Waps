@@ -5,6 +5,7 @@ namespace App\PlusCourtChemin\Controleur;
 use App\PlusCourtChemin\Lib\MessageFlash;
 use App\PlusCourtChemin\Lib\PlusCourtChemin;
 use App\PlusCourtChemin\Modele\DataObject\NoeudCommune;
+use App\PlusCourtChemin\Modele\HTTP\Cookie;
 use App\PlusCourtChemin\Modele\Repository\NoeudCommuneRepository;
 use App\PlusCourtChemin\Modele\Repository\NoeudRoutierRepository;
 
@@ -74,8 +75,12 @@ class ControleurNoeudCommune extends ControleurGenerique
                 "id_rte500" => $noeudCommuneArrivee->getId_nd_rte()
             ])[0];
 
+            $start = microtime(true);
             $pcc = new PlusCourtChemin($noeudRoutierDepartGid, $noeudRoutierArriveeGid, $noeudRoutierRepository);
             $distance = $pcc->calculer();
+            $end = microtime(true);
+            $time = $end - $start;
+            Cookie::enregistrer("temps_calcul", round($time, 2), 300000);
 
             $parametres["nomCommuneDepart"] = $nomCommuneDepart;
             $parametres["nomCommuneArrivee"] = $nomCommuneArrivee;

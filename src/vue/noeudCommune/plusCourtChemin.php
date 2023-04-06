@@ -24,7 +24,7 @@
 <div class="resultat">
     <?php if (!empty($_POST)) { ?>
         <p>
-            <?= $nomCommuneDepart ?> -> <?= $nomCommuneArrivee ?> = <?= $distance ?>km.
+            <?= $nomCommuneDepart ?> -> <?= $nomCommuneArrivee ?> = <?= $distance ?>km. <?php if(App\PlusCourtChemin\Modele\HTTP\Cookie::existeCle("temps_calcul")) echo("Temps calcul = " . App\PlusCourtChemin\Modele\HTTP\Cookie::lire("temps_calcul") . " secondes.") ?>
         </p>
     <?php } ?>
 </div>
