@@ -9,6 +9,7 @@ use App\PlusCourtChemin\Lib\MotDePasse;
 use App\PlusCourtChemin\Lib\VerificationEmail;
 use App\PlusCourtChemin\Modele\DataObject\Utilisateur;
 use App\PlusCourtChemin\Modele\Repository\UtilisateurRepository;
+use http\Message;
 
 class ControleurUtilisateur extends ControleurGenerique
 {
@@ -82,7 +83,7 @@ class ControleurUtilisateur extends ControleurGenerique
     public static function creerDepuisFormulaire(): void
     {
         if (
-            isset($_REQUEST['login']) && isset($_REQUEST['prenom']) && isset($_REQUEST['nom'])
+            isset($_REQUEST['prenom']) && isset($_REQUEST['nom'])
             && isset($_REQUEST['mdp']) && isset($_REQUEST['mdp2'])
         ) {
             if ($_REQUEST["mdp"] !== $_REQUEST["mdp2"]) {
@@ -107,6 +108,9 @@ class ControleurUtilisateur extends ControleurGenerique
             $succesSauvegarde = $utilisateurRepository->ajouter($utilisateur);
             if ($succesSauvegarde) {
                 MessageFlash::ajouter("success", "L'utilisateur a bien été créé !");
+                $login = $utilisateur->getLogin();
+                $nonce = $utilisateur->getNonce();
+                MessageFlash::ajouter("warning", "<a href='controleurFrontal.php?action=validerEmail&controleur=utilisateur&login=$login&nonce=$nonce'>Valider votre adresse mail !</a>");
                 ControleurUtilisateur::rediriger("utilisateur", "afficherListe");
             } else {
                 MessageFlash::ajouter("warning", "Login existant.");
@@ -224,16 +228,16 @@ class ControleurUtilisateur extends ControleurGenerique
 
     public static function connecter(): void
     {
-        if (!(isset($_REQUEST['login']) && isset($_REQUEST['mdp']))) {
-            MessageFlash::ajouter("danger", "Login ou mot de passe manquant.");
+        if (!(isset($_REQUEST['mail']) && isset($_REQUEST['mdp']))) {
+            MessageFlash::ajouter("danger", "Mail ou mot de passe manquant.");
             ControleurUtilisateur::rediriger("utilisateur", "afficherFormulaireConnexion");
         }
         $utilisateurRepository = new UtilisateurRepository();
         /** @var Utilisateur $utilisateur */
-        $utilisateur = $utilisateurRepository->recupererParClePrimaire($_REQUEST["login"]);
+        $utilisateur = $utilisateurRepository->recupererParMail($_REQUEST["mail"]);
 
         if ($utilisateur == null) {
-            MessageFlash::ajouter("warning", "Login inconnu.");
+            MessageFlash::ajouter("warning", "Adresse-mail inconnu.");
             ControleurUtilisateur::rediriger("utilisateur", "afficherFormulaireConnexion");
         }
 
@@ -249,7 +253,7 @@ class ControleurUtilisateur extends ControleurGenerique
 
         ConnexionUtilisateur::connecter($utilisateur->getLogin());
         MessageFlash::ajouter("success", "Connexion effectuée.");
-        ControleurUtilisateur::rediriger("utilisateur", "afficherDetail", ["login" => $_REQUEST["login"]]);
+        ControleurUtilisateur::rediriger("utilisateur", "afficherDetail", ["login" => $utilisateur->getLogin()]);
     }
 
     public static function deconnecter(): void

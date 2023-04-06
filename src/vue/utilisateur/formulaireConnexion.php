@@ -4,7 +4,7 @@
         <h2 class="form-user-title">Connexion</h2>
         <p class="InputUser-div">
             <label class="InputUser-item" for="login_id">Adresse mail</label>
-            <input class="InputUser-field" type="text" placeholder="dev@waps.fr" name="login" id="login_id" required>
+            <input class="InputUser-field" type="text" placeholder="dev@waps.fr" name="mail" id="mail_id" required>
         </p>
         <p class="InputUser-div">
             <label class="InputUser-item" for="mdp_id">Mot de passe</label>

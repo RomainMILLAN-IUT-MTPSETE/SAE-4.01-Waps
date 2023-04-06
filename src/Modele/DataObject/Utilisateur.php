@@ -3,11 +3,12 @@
 namespace App\PlusCourtChemin\Modele\DataObject;
 
 use App\PlusCourtChemin\Lib\MotDePasse;
+use App\PlusCourtChemin\Modele\Repository\UtilisateurRepository;
 
 class Utilisateur extends AbstractDataObject
 {
 
-    private string $login;
+    private int $login;
     private string $nom;
     private string $prenom;
     private string $mdpHache;
@@ -17,7 +18,7 @@ class Utilisateur extends AbstractDataObject
     private string $nonce;
 
     public function __construct(
-        string $login,
+        int $login,
         string $nom,
         string $prenom,
         string $mdpHache,
@@ -38,8 +39,9 @@ class Utilisateur extends AbstractDataObject
 
     public static function construireDepuisFormulaire (array $tableauFormulaire) : Utilisateur
     {
+        $login = UtilisateurRepository::getNextLogin();
         return new Utilisateur(
-            $tableauFormulaire["login"],
+            $login,
             $tableauFormulaire["nom"],
             $tableauFormulaire["prenom"],
             MotDePasse::hacher($tableauFormulaire["mdp"]),
@@ -50,7 +52,7 @@ class Utilisateur extends AbstractDataObject
         );
     }
 
-    public function getLogin(): string
+    public function getLogin(): int
     {
         return $this->login;
     }

@@ -1,11 +1,7 @@
 <link rel="stylesheet" href="../ressources/css/formUser.css">
 <div class="form-user">
     <form method="<?= $method ?>" action="controleurFrontal.php">
-        <h2 class="form-user-title">Mon formulaire :</h2>
-        <p class="InputUser-div">
-            <label class="InputUser-item" for="login_id">Login&#42;</label>
-            <input class="InputUser-field" type="text" value="" placeholder="dev@waps.fr" name="login" id="login_id" required>
-        </p>
+        <h2 class="form-user-title">Inscription</h2>
         <p class="InputUser-div">
             <label class="InputUser-item" for="email_id">Email&#42;</label>
             <input class="InputUser-field" type="email" value="" placeholder="rlebreton@yopmail.com" name="email" id="email_id" required>
