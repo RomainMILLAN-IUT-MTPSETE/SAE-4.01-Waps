@@ -1,30 +1,34 @@
 <link rel="text/javascript">
-<form action="" method="post" autocomplete="off">
-    <fieldset>
-        <legend>Plus court chemin </legend>
-        <p class="InputAddOn">
-            <label class="InputAddOn-item" for="nomCommuneDepart_id">Nom de la commune de départ</label>
-            <input class="InputAddOn-field" type="text" value="" placeholder="Ex : Menton" name="nomCommuneDepart" id="nomCommuneDepart_id" required>
-        </p>
-        <div id="autoCompletion">
+<link rel="stylesheet" href="../ressources/css/plusCourtChemin.css">
+
+<div class="choose">
+    <h2 class="choose_title">Choisissez votre itinéraire !</h2>
+
+    <form action="" method="post" autocomplete="off">
+        <div class="inputDiv">
+            <p class="Input-label" for="nomCommuneDepart_id">Point de départ</p>
+            <input class="Input-field" type="text" value="" placeholder="Ex : Sète" name="nomCommuneDepart" id="nomCommuneDepart_id" required>
+        </div>
+        <div class="autoCompletion" id="autoCompletion">
 
         </div>
-        <p class="InputAddOn">
-            <label class="InputAddOn-item" for="nomCommuneArrivee_id">Nom de la commune de départ</label>
-            <input class="InputAddOn-field" type="text" value="" placeholder="Ex : Menton" name="nomCommuneArrivee" id="nomCommuneArrivee_id" required>
-        </p>
+        <div class="inputDiv">
+            <p class="Input-label" for="nomCommuneArrivee_id">Point d’arrivé</p>
+            <input class="Input-field" type="text" value="" placeholder="Ex : Montpellier" name="nomCommuneArrivee" id="nomCommuneArrivee_id" required>
+        </div>
         <input type="hidden" name="XDEBUG_TRIGGER">
-        <p>
-            <input class="InputAddOn-field" type="submit" value="Calculer" />
-        </p>
-    </fieldset>
-</form>
 
-<?php if (!empty($_POST)) { ?>
-    <p>
-        Le plus court chemin entre <?= $nomCommuneDepart ?> et <?= $nomCommuneArrivee ?> mesure <?= $distance ?>km.
-    </p>
-<?php } ?>
+        <input class="Input-submit" type="submit" value="Calculer" />
+    </form>
+</div>
+<div class="resultat">
+    <?php if (!empty($_POST)) { ?>
+        <p>
+            <?= $nomCommuneDepart ?> -> <?= $nomCommuneArrivee ?> = <?= $distance ?>km.
+        </p>
+    <?php } ?>
+</div>
+
 <script type="text/javascript"> 
     <?php 
     use App\PlusCourtChemin\Modele\Repository\NoeudCommuneRepository;
