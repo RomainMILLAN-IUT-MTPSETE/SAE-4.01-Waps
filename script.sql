@@ -48,6 +48,21 @@ create index idx_geom_troncon_route
 create index idx_gid_troncon_route
     on troncon_route (gid);
 
+CREATE TABLE utilisateur (
+    login integer NOT NULL,
+    nom varchar(255) NOT NULL,
+    prenom varchar(255) NOT NULL,
+    mdp_hache varchar(255) NOT NULL,
+    est_admin bool NOT NULL,
+    email varchar(255) NOT NULL,
+    email_a_valider varchar(255) NOT NULL,
+    nonce varchar(255) NOT NULL,
+    CONSTRAINT utilisateur_pkey PRIMARY KEY (login)
+);
+
+insert into utilisateur (login, nom, prenom, mdp_hache, est_admin, email, email_a_valider, nonce)
+values (1, 'DEV', 'DEV', '', '0', '', '', '');
+
 create materialized view noeud_routier_mt as
 SELECT nr.gid,
        nr.geom
