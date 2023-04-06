@@ -65,6 +65,7 @@
     }
     .choose form{
         width: 100%;
+        border: 0;
     }
     .choose form .inputDiv{
         flex-direction: column;
