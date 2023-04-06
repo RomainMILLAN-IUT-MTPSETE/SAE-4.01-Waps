@@ -3,6 +3,7 @@
 namespace App\PlusCourtChemin\Lib;
 
 use App\PlusCourtChemin\Modele\DataObject\NoeudRoutier;
+use App\PlusCourtChemin\Modele\HTTP\Cookie;
 use App\PlusCourtChemin\Modele\Repository\NoeudRoutierRepository;
 use SplPriorityQueue;
 
@@ -19,6 +20,7 @@ class PlusCourtChemin {
     }
 
     public function calculer(): ?float {
+        $start = microtime(true);
         $noeudRoutierDepartGid = $this->noeudRoutierDepart->getGid();
         $noeudRoutierArriveeGid = $this->noeudRoutierArrivee->getGid();
         $this->distances = [$noeudRoutierDepartGid => 0];
@@ -27,7 +29,12 @@ class PlusCourtChemin {
         $frontiere->insert($noeudRoutierDepartGid, -$this->heuristique[$noeudRoutierDepartGid]);
         while (!$frontiere->isEmpty()) {
             $noeudRoutierGidCourant = $frontiere->extract();
-            if ($noeudRoutierGidCourant === $noeudRoutierArriveeGid) return $this->distances[$noeudRoutierGidCourant];
+            if ($noeudRoutierGidCourant === $noeudRoutierArriveeGid){ 
+                $end = microtime(true);
+                $time = $end - $start;
+                Cookie::enregistrer("temps_calcul", round($time, 2), 2000);
+                return $this->distances[$noeudRoutierGidCourant];
+            }
             $voisins = $this->noeudRoutierRepository->getVoisins($noeudRoutierGidCourant);
             foreach ($voisins as $voisin) {
                 $noeudVoisinGid = $voisin["noeud_routier_gid"];
