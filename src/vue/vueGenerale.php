@@ -5,6 +5,7 @@
     <title>Waps - <?= $pagetitle ?></title>
     <link rel="stylesheet" href="../ressources/css/main.css">
     <link rel="stylesheet" href="../ressources/css/bootstrap.css">
+    <link rel="stylesheet" href="../ressources/css/footer.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
     <link rel="shortcut icon" href="../ressources/img/icone.svg" type="image/x-icon">
@@ -64,9 +65,7 @@
         ?>
     </main>
     <footer>
-        <p>
-            Copyleft Romain Lebreton
-        </p>
+        <p>Waps 2023 © MILLAN, TREGUIER, CHARRADE, PIERRE, CALAS</p>
     </footer>
 </body>
 
