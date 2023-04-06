@@ -19,6 +19,7 @@
             <a class="nav_a" href="controleurFrontal.php">Accueil</a>
             <a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=utilisateur">Utilisateurs</a>
             <a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=noeudCommune">Communes</a>
+            <a href="controleurFrontal.php?action=self&controleur=home">Home</a>
 
             <?php
 
