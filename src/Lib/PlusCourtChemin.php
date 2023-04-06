@@ -23,21 +23,20 @@ class PlusCourtChemin {
         $noeudRoutierArriveeGid = $this->noeudRoutierArrivee->getGid();
         $this->distances = [$noeudRoutierDepartGid => 0];
         $this->heuristique[$noeudRoutierDepartGid] = $this->calculerHeuristique($this->noeudRoutierDepart->getLatitude(), $this->noeudRoutierDepart->getLongitude());
-        $frontiere = [$noeudRoutierDepartGid => $this->distances[$noeudRoutierDepartGid] + $this->heuristique[$noeudRoutierDepartGid]];
-        while (!empty($frontiere)) {
-            $noeudRoutierGidCourant = array_keys($frontiere, min($frontiere))[0];
+        $frontiere = new SplPriorityQueue();
+        $frontiere->insert($noeudRoutierDepartGid, -$this->heuristique[$noeudRoutierDepartGid]);
+        while (!$frontiere->isEmpty()) {
+            $noeudRoutierGidCourant = $frontiere->extract();
             if ($noeudRoutierGidCourant === $noeudRoutierArriveeGid) return $this->distances[$noeudRoutierGidCourant];
-            unset($frontiere[$noeudRoutierGidCourant]);
-            $noeudRoutierCourant = $this->noeudRoutierRepository->recupererParClePrimaire($noeudRoutierGidCourant);
-            $voisins = $noeudRoutierCourant->getVoisins();
+            $voisins = $this->noeudRoutierRepository->getVoisins($noeudRoutierGidCourant);
             foreach ($voisins as $voisin) {
                 $noeudVoisinGid = $voisin["noeud_routier_gid"];
                 $distanceTroncon = $voisin["longueur"];
                 $distanceProposee = $this->distances[$noeudRoutierGidCourant] + $distanceTroncon;
                 if (!isset($this->distances[$noeudVoisinGid]) || $distanceProposee < $this->distances[$noeudVoisinGid]) {
                     $this->distances[$noeudVoisinGid] = $distanceProposee;
-                    $this->heuristique[$noeudVoisinGid] = $this->calculerHeuristique($voisin["latitude"],$voisin["longitude"]);
-                    $frontiere[$noeudVoisinGid] = $distanceProposee + $this->heuristique[$noeudVoisinGid];
+                    $this->heuristique[$noeudVoisinGid] = $this->calculerHeuristique($voisin["latitude"], $voisin["longitude"]);
+                    $frontiere->insert($noeudVoisinGid, -($distanceProposee + $this->heuristique[$noeudVoisinGid]));
                 }
             }
         }

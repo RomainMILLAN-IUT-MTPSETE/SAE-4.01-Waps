@@ -62,16 +62,14 @@ class NoeudRoutierRepository extends AbstractRepository
     public function getVoisins(int $noeudRoutierGid): array
     {
         $requeteSQL = "SELECT
-        CASE WHEN noeud_voisin = :gidTag THEN noeud_routier ELSE noeud_voisin END AS noeud_routier_gid,
-        CASE WHEN noeud_voisin = :gidTag THEN noeud_routier_latitude ELSE noeud_voisin_latitude END AS latitude,
-        CASE WHEN noeud_voisin = :gidTag THEN noeud_routier_longitude ELSE noeud_voisin_longitude END AS longitude,
+        CASE WHEN noeud_voisin = ? THEN noeud_routier ELSE noeud_voisin END AS noeud_routier_gid,
+        CASE WHEN noeud_voisin = ? THEN noeud_routier_latitude ELSE noeud_voisin_latitude END AS latitude,
+        CASE WHEN noeud_voisin = ? THEN noeud_routier_longitude ELSE noeud_voisin_longitude END AS longitude,
         longueur
         FROM voisins
-        WHERE noeud_voisin = :gidTag OR noeud_routier = :gidTag;";
+        WHERE noeud_voisin = ? OR noeud_routier = ?;";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
-        $pdoStatement->execute(array(
-            "gidTag" => $noeudRoutierGid
-        ));
+        $pdoStatement->execute(array($noeudRoutierGid, $noeudRoutierGid, $noeudRoutierGid, $noeudRoutierGid, $noeudRoutierGid));
         return $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -80,11 +78,9 @@ class NoeudRoutierRepository extends AbstractRepository
         ST_Y(ST_AsText(geom)) AS latitude,
         ST_X(ST_AsText(geom)) AS longitude
         FROM geom_noeud_routier
-        WHERE gid = :gidTag";
+        WHERE gid = ?";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
-        $pdoStatement->execute(array(
-            "gidTag" => $noeudRoutierGid
-        ));
+        $pdoStatement->execute(array($noeudRoutierGid));
         $tab = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
         return $tab[0];
     }
