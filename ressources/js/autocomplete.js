@@ -13,7 +13,7 @@ xhr.onload = function(){
 xhr.send(null);
 
 function callback(xhr){
-    communes = JSON.parse(xhr.responseText);
+    communes = Array.from(JSON.parse(xhr.responseText));
     inputVilleArrivee.addEventListener(`input`, (e) => {
         const value = e.target.value;
         videVilles(divAutocompletionArrivee);
@@ -25,9 +25,11 @@ function callback(xhr){
                 fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${pos.coords.longitude}&lat=${pos.coords.latitude}`)
                     .then(response => response.json())
                     .then(data => {
-                        city = data.features[0].properties.city;
-                        communesSelectionnees = ["Votre position"].concat(communesSelectionnees);
-                        afficheVilles(communesSelectionnees, divAutocompletionArrivee);
+                        if(communes.includes(data.features[0].properties.city)){
+                            city = data.features[0].properties.city;
+                            communesSelectionnees = ["Votre position"].concat(communesSelectionnees);
+                            afficheVilles(communesSelectionnees, divAutocompletionArrivee);
+                        }
                     })
                     .catch(error => console.log(error));
             });
@@ -46,9 +48,12 @@ function callback(xhr){
                 fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${pos.coords.longitude}&lat=${pos.coords.latitude}`)
                     .then(response => response.json())
                     .then(data => {
-                        city = data.features[0].properties.city;
-                        communesSelectionnees = ["Votre position"].concat(communesSelectionnees);
-                        afficheVilles(communesSelectionnees, divAutocompletionDepart);
+                        if(communes.includes(data.features[0].properties.city)){
+                            console.log("oui");
+                            city = data.features[0].properties.city;
+                            communesSelectionnees = ["Votre position"].concat(communesSelectionnees);
+                            afficheVilles(communesSelectionnees, divAutocompletionDepart);
+                        }
                     })
                     .catch(error => console.log(error));
             });
