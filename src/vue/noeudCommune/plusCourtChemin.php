@@ -14,6 +14,7 @@
             <input class="Input-field" type="text" value="" placeholder="Ex : Montpellier" name="nomCommuneArrivee" id="nomCommuneArrivee_id" required>
         </div>
         <div class="autoCompletionArrivee" id="autoCompletionArrivee"></div>
+        <!-- <input type="hidden" name="XDEBUG_TRIGGER"> -->
         <input class="Input-submit" type="submit" value="Calculer" />
     </form>
 </div>
