@@ -7,15 +7,24 @@ $login = $utilisateur->getLogin();
 $loginHTML = htmlspecialchars($login);
 $prenomHTML = htmlspecialchars($utilisateur->getPrenom());
 $nomHTML = htmlspecialchars($utilisateur->getNom());
+$adresseMail = htmlspecialchars($utilisateur->getEmail());
 $loginURL = rawurlencode($login);
 ?>
 
-<p>
-    Utilisateur <?= "$prenomHTML $nomHTML" ?> de login <?= $loginHTML ?>
-
-    <?php if (ConnexionUtilisateur::estUtilisateur($login) || ConnexionUtilisateur::estAdministrateur()) { ?>
-    <a href="controleurFrontal.php?action=afficherFormulaireMiseAJour&controleur=utilisateur&login=<?= $loginURL ?>">(mettre à jour)</a>
-    <a href="controleurFrontal.php?action=supprimer&controleur=utilisateur&login=<?= $loginURL ?>">(supprimer)</a>
-        <a href="controleurFrontal.php?action=deconnecter&controleur=utilisateur&login=<?= $loginURL ?>">(deconnection)</a>
-    <?php } ?>
-</p>
+<link rel="stylesheet" href="../ressources/css/users.css">
+<div class="user-container">
+    <div class="info-user">
+        <h2>Informations de l’utilisateur <a href="controleurFrontal.php?action=deconnecter&controleur=utilisateur&login=<?= $loginURL ?>"><img src="../ressources/img/logout.png" alt="Icone logout"></a></h2>
+        <p>Nom: <?= $nomHTML ?></p>
+        <p>Prénom: <?= $prenomHTML ?></p>
+        <p>Adresse-mail: <?= $adresseMail ?></p>
+    </div>
+    <div class="history">
+        <h2>Historique des recherches:</h2>
+        <div class="history-list">
+            <span><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>Montpellier → Sète: 4km</p></span>
+            <span><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>Montpellier → Sète: 4km</p></span>
+            <span><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>Montpellier → Sète: 4km</p></span>
+        </div>
+    </div>
+</div>
