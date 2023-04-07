@@ -53,3 +53,13 @@
     font-size: 20px;
     font-weight: lighter;
 }
+
+@media (max-width: 750px) {
+    .history{
+        width: 80%;
+        margin: auto;
+        margin-top: 5%;
+        min-height: 20px;
+        padding-bottom: 140px;
+    }
+}
