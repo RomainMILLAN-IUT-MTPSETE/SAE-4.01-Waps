@@ -1,0 +1,33 @@
+.listecom-container {
+    width: 95%;
+    margin-top: 2.5%;
+}
+.listecom-container h2{
+    margin-left: 2.5%;
+    font-weight: normal;
+}
+
+.listcom-content{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(35px, auto);
+    margin-left: 7.5%;
+}
+.listcom-content a {
+    text-decoration: none;
+    color: black;
+}
+.cnt {
+    display: flex;
+    flex-direction: row;
+    height: 20px;
+}
+.cnt img {
+    transform: rotate(90deg);
+    height: 15px;
+}
+.cnt p {
+    margin: 0;
+    margin-left: 10px;
+}

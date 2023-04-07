@@ -1,16 +1,13 @@
-<?php
+<link rel="stylesheet" href="../ressources/css/listeCommunes.css">
 
-echo <<<HTML
-<a href="?action=plusCourtChemin&controleur=noeudCommune">Calculer un plus court chemin</a>
+<div class="listecom-container">
+    <h2>Liste des communes</h2>
 
-<h3>Liste des noeuds communes :</h3>
-<ul>
-HTML;
-
-foreach ($noeudsCommunes as $noeudCommune) {
-    echo '<li>';
-    require __DIR__ . "/detail.php";
-    echo " <a href=\"?action=afficherDetail&controleur=noeudCommune&gid={$noeudCommune->getGid()}\">(Détail)</a>";
-    echo '</li>';
-}
-echo "</ul>\n";
+    <div class="listcom-content">
+        <?php
+        foreach ($noeudsCommunes as $noeudCommune) {
+            echo '<a href="controleurFrontal.php?action=afficherDetail&controleur=noeudCommune&gid='.$noeudCommune->getGid().'"><span class="cnt"><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>'.$noeudCommune->getNomCommune().'</p></span></a>';
+        }
+        ?>
+    </div>
+</div>
