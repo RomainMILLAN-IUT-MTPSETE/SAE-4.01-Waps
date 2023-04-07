@@ -35,3 +35,19 @@
     margin: 0;
     margin-bottom: 5px;
 }
+
+@media (max-width: 750px){
+    .detailCommune-container {
+        margin-top: 15%;
+    }
+
+    .detailCommune-content p {
+        font-size: 15px;
+        word-wrap: break-word;
+        overflow: hidden;
+        margin-top: 10px;
+    }
+    .detailCommune-content p:first-child{
+        margin-top: 0px;
+    }
+}
