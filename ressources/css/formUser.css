@@ -41,3 +41,12 @@
     font-size: 12px;
     color: black;
 }
+
+@media (max-width: 750px){
+    .form-user {
+        width: 80%;
+    }
+    .form-user .InputUser-submit{
+        margin-top: 30%;
+    }
+}
