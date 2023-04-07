@@ -58,7 +58,7 @@ class NoeudCommuneRepository extends AbstractRepository
     }
 
     public function getNoeudCommune($gid = 0): ?NoeudCommune{
-        $requeteSQL = "SELECT * FROM noeud_commune WHERE gid='$gid' ORDER BY nom_comm";
+        $requeteSQL = "SELECT * FROM noeud_commune WHERE gid='$gid'";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
         $pdoStatement->execute();
 
@@ -66,6 +66,18 @@ class NoeudCommuneRepository extends AbstractRepository
             return $this->construireDepuisTableau($item);
         }
         return null;
+    }
+
+    public function getAllNoeudCommuneOrderByName(): array{
+        $requeteSQL = "SELECT * FROM noeud_commune ORDER BY nom_comm";
+        $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
+        $pdoStatement->execute();
+
+        $res = [];
+        foreach ($pdoStatement as $item) {
+            $res[] = $this->construireDepuisTableau($item);
+        }
+        return $res;
     }
 
     public function getNomsCommunes(): array{

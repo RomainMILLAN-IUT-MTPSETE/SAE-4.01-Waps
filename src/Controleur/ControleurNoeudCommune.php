@@ -19,7 +19,7 @@ class ControleurNoeudCommune extends ControleurGenerique
 
     public static function afficherListe(): void
     {
-        $noeudsCommunes = (new NoeudCommuneRepository())->recuperer("ALL");     //appel au modèle pour gerer la BD
+        $noeudsCommunes = (new NoeudCommuneRepository())->getAllNoeudCommuneOrderByName();     //appel au modèle pour gerer la BD
         ControleurNoeudCommune::afficherVue('vueGenerale.php', [
             "noeudsCommunes" => $noeudsCommunes,
             "pagetitle" => "Liste des Communes",
