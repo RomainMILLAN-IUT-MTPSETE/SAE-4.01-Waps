@@ -1,6 +1,11 @@
+.pcc-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5%;
+}
 .choose{
     width: 45%;
-    margin: auto;
 }
 
 .choose_title{
@@ -59,10 +64,6 @@
     border: 0px;
     border-radius: 5px;
 }
-#map{
-    height: 650px;
-    width: 650px;
-}
 @media (max-width: 750px) {
     .choose{
         width: 95%;
@@ -79,5 +80,29 @@
     }
     .choose form .Input-field{
         height: 100px;
+    }
+}
+
+
+.pcc-resultat{
+    width: 45%;
+}
+#map{
+    height: 500px;
+    width: 100%;
+}
+@media(max-width: 800px){
+    .pcc-container{
+        display: flex;
+        flex-direction: column-reverse;
+        width: 90%;
+        margin: auto;
+        margin-top: 5%;
+    }
+    .pcc-resultat{
+        width: 95%;
+    }
+    #map{
+        margin: auto;
     }
 }
