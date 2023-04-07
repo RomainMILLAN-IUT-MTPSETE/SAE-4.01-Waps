@@ -1,0 +1,15 @@
+.erreur-container {
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 5%;
+}
+.erreur-container h2{
+    font-weight: bold;
+    font-size: 75px;
+    margin-bottom: 0px;
+}
+.erreur-container p {
+    font-weight: lighter;
+    font-size: 20px;
+    margin: 0;
+}
