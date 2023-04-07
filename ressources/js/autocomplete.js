@@ -2,6 +2,7 @@ const divAutocompletionDepart = document.getElementById(`autoCompletionDepart`);
 const divAutocompletionArrivee = document.getElementById(`autoCompletionArrivee`);
 const inputVilleDepart = document.getElementById(`nomCommuneDepart_id`);
 const inputVilleArrivee = document.getElementById(`nomCommuneArrivee_id`);
+let communes = [];
 
 let xhr = new XMLHttpRequest();
 xhr.open(`GET`, `controleurFrontal.php?controleur=noeudCommune&action=getNomsCommunesJSON`, true);
@@ -79,6 +80,37 @@ function afficheVilles(villes, target){
     }
 }
 
+divAutocompletionDepart.addEventListener('click', event => {
+    inputVilleDepart.value = event.target.innerHTML;
+    videVilles();
+});
+
+inputVilleDepart.onkeydown = event => {
+    if (event.code === 'ArrowUp') {
+        if (0 <= communes.indexOf(inputVilleDepart.value) - 1) {
+            inputVilleDepart.value = communes[communes.indexOf(inputVilleDepart.value) - 1]
+        } else {
+            inputVilleDepart.value = communes[communes.length - 1]
+        }
+    } else if (event.code === 'ArrowDown') {
+        if (communes.indexOf(inputVilleDepart.value) + 1 < communes.length) {
+            inputVilleDepart.value = communes[communes.indexOf(inputVilleDepart.value) + 1]
+        } else {
+            inputVilleDepart.value = communes[0]
+        }
+    } else if (event.code === 'Enter') {
+        videVilles()
+    }
+    Array.from(divAutocompletionDepart.children).forEach(element => {
+        if (element.innerHTML === inputVilleDepart.value) {
+            element.style.backgroundColor = "black"
+            element.style.color = "white";
+        } else {
+            element.style.backgroundColor = ""
+            element.style.color = "black";
+        }
+    })
+}
 
 
 /**

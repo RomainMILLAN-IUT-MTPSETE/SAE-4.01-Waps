@@ -64,6 +64,32 @@
     border: 0px;
     border-radius: 5px;
 }
+
+.autoCompletionDepart{
+    background-color: white;
+    position: absolute;
+    width: 100px;
+}
+
+.autocompletion p {
+    margin: 0 0 0 0;
+    padding: 0 5px 0 5px;
+}
+
+.autocompletion p:hover {
+    background-color:aliceblue;
+    cursor:default;
+}
+
+.ConteneurAutoCompletion {
+    display:inline-block;
+    vertical-align: top;
+}
+
+div#autoCompletionDepart.autoCompletionDepart {
+    background-color: white;
+}
+
 @media (max-width: 750px) {
     .choose{
         width: 95%;
