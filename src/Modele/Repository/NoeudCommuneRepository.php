@@ -14,8 +14,14 @@ class NoeudCommuneRepository extends AbstractRepository
         return new NoeudCommune(
             $noeudRoutierTableau["gid"],
             $noeudRoutierTableau["id_rte500"],
+            $noeudRoutierTableau["insee_comm"],
+            $noeudRoutierTableau["nom_chf"],
+            $noeudRoutierTableau["statut"],
+            $noeudRoutierTableau["superficie"],
             $noeudRoutierTableau["nom_comm"],
-            $noeudRoutierTableau["id_nd_rte"]
+            $noeudRoutierTableau["population"],
+            $noeudRoutierTableau["id_nd_rte"],
+            $noeudRoutierTableau["geom"]
         );
     }
 
@@ -31,7 +37,7 @@ class NoeudCommuneRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return ["gid", "id_rte500", "nom_comm", "id_nd_rte"];
+        return ["gid", "id_rte500", "insee_comm", "nom_chf", "statut", "superficie", "nom_comm", "population", "id_nd_rte", "geom"];
     }
 
     // On bloque l'ajout, la màj et la suppression pour ne pas modifier la table
@@ -51,16 +57,15 @@ class NoeudCommuneRepository extends AbstractRepository
         return false;
     }
 
-    public function getNoeudCommune(): array{
-        $requeteSQL = "SELECT * FROM noeud_commune ORDER BY nom_comm";
+    public function getNoeudCommune($gid = 0): ?NoeudCommune{
+        $requeteSQL = "SELECT * FROM noeud_commune WHERE gid='$gid' ORDER BY nom_comm";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
         $pdoStatement->execute();
-        
-        $res = [];
+
         foreach ($pdoStatement as $item) {
-            $res[] = $item[0];
+            return $this->construireDepuisTableau($item);
         }
-        return $res;
+        return null;
     }
 
     public function getNomsCommunes(): array{

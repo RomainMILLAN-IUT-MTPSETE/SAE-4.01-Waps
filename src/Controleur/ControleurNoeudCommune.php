@@ -30,21 +30,21 @@ class ControleurNoeudCommune extends ControleurGenerique
     public static function afficherDetail(): void
     {
         if (!isset($_REQUEST['gid'])) {
-            MessageFlash::ajouter("danger", "Immatriculation manquante.");
+            MessageFlash::ajouter("danger", "Identifiant manquante.");
             ControleurNoeudCommune::rediriger("noeudCommune", "afficherListe");
         }
 
         $gid = $_REQUEST['gid'];
-        $noeudCommune = (new NoeudCommuneRepository())->recupererParClePrimaire($gid);
+        $noeudCommune = (new NoeudCommuneRepository())->getNoeudCommune($gid);
 
         if ($noeudCommune === null) {
-            MessageFlash::ajouter("warning", "gid inconnue.");
+            MessageFlash::ajouter("warning", "Commune inconnue.");
             ControleurNoeudCommune::rediriger("noeudCommune", "afficherListe");
         }
 
         ControleurNoeudCommune::afficherVue('vueGenerale.php', [
             "noeudCommune" => $noeudCommune,
-            "pagetitle" => "Détail de la noeudCommune",
+            "pagetitle" => "Détail de la Commune",
             "cheminVueBody" => "noeudCommune/detail.php"
         ]);
     }
