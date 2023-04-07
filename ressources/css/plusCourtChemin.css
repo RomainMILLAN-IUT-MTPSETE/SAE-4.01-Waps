@@ -68,7 +68,8 @@
 .autoCompletionDepart{
     background-color: white;
     position: absolute;
-    width: 100px;
+    width: 222px;
+    border: solid 1px black;
 }
 
 .autocompletion p {
@@ -81,12 +82,45 @@
     cursor:default;
 }
 
-.ConteneurAutoCompletion {
+.ConteneurAutoCompletionDepart {
     display:inline-block;
     vertical-align: top;
 }
 
 div#autoCompletionDepart.autoCompletionDepart {
+    background-color: white;
+}
+
+
+
+
+
+
+
+
+.autoCompletionArrivee{
+    background-color: white;
+    position: absolute;
+    width: 222px;
+    border: solid 1px black;
+}
+
+.autocompletion p {
+    margin: 0 0 0 0;
+    padding: 0 5px 0 5px;
+}
+
+.autocompletion p:hover {
+    background-color:aliceblue;
+    cursor:default;
+}
+
+.ConteneurAutoCompletionArrivee {
+    display:inline;
+    vertical-align: top;
+}
+
+div#autoCompletionArrivee.autoCompletionArrivee {
     background-color: white;
 }
 
