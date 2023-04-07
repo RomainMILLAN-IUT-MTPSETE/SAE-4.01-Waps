@@ -27,6 +27,19 @@ class ControleurNoeudCommune extends ControleurGenerique
         ]);
     }
 
+    public static function rechercher(): void
+    {
+        if(!isset($_REQUEST['search'])){
+            MessageFlash::ajouter("danger", "Aucune recherche manquante.");
+            ControleurNoeudCommune::rediriger("noeudCommune", "plusCourtChemin");
+        }
+
+        $nom_comm = $_REQUEST['search'];
+        $noeudCommune = (new NoeudCommuneRepository())->getNoeudCommuneByName($nom_comm);
+
+        ControleurNoeudCommune::rediriger("noeudCommune", "afficherDetail", ['gid' => $noeudCommune->getGid()]);
+    }
+
     public static function afficherDetail(): void
     {
         if (!isset($_REQUEST['gid'])) {

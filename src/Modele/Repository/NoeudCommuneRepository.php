@@ -68,6 +68,17 @@ class NoeudCommuneRepository extends AbstractRepository
         return null;
     }
 
+    public function getNoeudCommuneByName($nomComm): ?NoeudCommune{
+        $requeteSQL = "SELECT * FROM noeud_commune WHERE nom_comm='$nomComm' LIMIT 1";
+        $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
+        $pdoStatement->execute();
+
+        foreach ($pdoStatement as $item) {
+            return $this->construireDepuisTableau($item);
+        }
+        return null;
+    }
+
     public function getAllNoeudCommuneOrderByName(): array{
         $requeteSQL = "SELECT * FROM noeud_commune ORDER BY nom_comm";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);

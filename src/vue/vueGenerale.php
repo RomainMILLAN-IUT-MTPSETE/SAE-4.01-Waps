@@ -15,6 +15,11 @@
             <img class="logo" src="../ressources/img/logo.png" alt="logo"/>
         </a>
         <nav class="nav__container">
+            <form action="controleurFrontal.php" method="get">
+                <input type="hidden" name="action" value="rechercher">
+                <input type="hidden" name="controleur" value="noeudCommune">
+                <input type="text" name="search" id="search" placeholder="Rechercher"/>
+            </form>
             <a class="nav_a" href="controleurFrontal.php?action=plusCourtChemin&controleur=noeudCommune">Accueil</a>
             <a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=noeudCommune">Communes</a>
             <!--<a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=utilisateur">Utilisateurs</a>-->
