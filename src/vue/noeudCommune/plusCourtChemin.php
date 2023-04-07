@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="../ressources/css/plusCourtChemin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 <script type="text/javascript" src="../ressources/js/autocomplete.js" defer></script>
+<script type="text/javascript" src="../ressources/js/map.js" defer></script>
 <div class="choose">
     <h2 class="choose_title">Choisissez votre itinéraire !</h2>
-
     <form action="" method="post" autocomplete="off">
         <div class="inputDiv">
             <p class="Input-label" for="nomCommuneDepart_id">Point de départ</p>
@@ -10,7 +12,7 @@
         </div>
         <div class="autoCompletionDepart" id="autoCompletionDepart"></div>
         <div class="inputDiv">
-            <p class="Input-label" for="nomCommuneArrivee_id">Point d’arrivé</p>
+            <p class="Input-label" for="nomCommuneArrivee_id">Point d’arrivée</p>
             <input class="Input-field" type="text" value="" placeholder="Ex : Montpellier" name="nomCommuneArrivee" id="nomCommuneArrivee_id" required>
         </div>
         <div class="autoCompletionArrivee" id="autoCompletionArrivee"></div>
@@ -18,6 +20,7 @@
         <input class="Input-submit" type="submit" value="Calculer" />
     </form>
 </div>
+<div id="map"></div>
 <div class="resultat">
     <?php if (!empty($_POST)) { ?>
         <p>

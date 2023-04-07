@@ -59,6 +59,10 @@
     border: 0px;
     border-radius: 5px;
 }
+#map{
+    height: 650px;
+    width: 650px;
+}
 @media (max-width: 750px) {
     .choose{
         width: 95%;
