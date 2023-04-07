@@ -49,7 +49,6 @@ function callback(xhr){
                     .then(response => response.json())
                     .then(data => {
                         if(communes.includes(data.features[0].properties.city)){
-                            console.log("oui");
                             city = data.features[0].properties.city;
                             communesSelectionnees = ["Votre position"].concat(communesSelectionnees);
                             afficheVilles(communesSelectionnees, divAutocompletionDepart);
