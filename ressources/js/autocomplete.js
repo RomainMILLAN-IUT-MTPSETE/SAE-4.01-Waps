@@ -20,7 +20,6 @@ function callback(xhr){
         let communesSelectionnees = Array.from(communes).filter((commune) => {
             return commune.toLowerCase().startsWith(value.toLowerCase());
         }).slice(0, 5);
-        console.log(communesSelectionnees);
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition((pos) => {
                 fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${pos.coords.longitude}&lat=${pos.coords.latitude}`)
@@ -42,7 +41,6 @@ function callback(xhr){
         let communesSelectionnees = Array.from(communes).filter((commune) => {
             return commune.toLowerCase().startsWith(value.toLowerCase());
         }).slice(0, 5);
-        console.log(communesSelectionnees);
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition((pos) => {
                 fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${pos.coords.longitude}&lat=${pos.coords.latitude}`)
