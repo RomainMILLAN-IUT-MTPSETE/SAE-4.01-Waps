@@ -41,6 +41,10 @@
             }
             ?>
         </nav>
+        <nav class="nav__mobile">
+            <a href="controleurFrontal.php?action=plusCourtChemin&controleur=noeudCommune"><img src="../ressources/img/icone.svg" alt="Icone Waps"></a>
+            <a href="#"><img src="../ressources/img/mobilemenu.svg" alt="Icone Waps"></a>
+        </nav>
     </header>
     <div>
         <?php

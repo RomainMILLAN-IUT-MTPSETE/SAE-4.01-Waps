@@ -12,6 +12,7 @@
 .acceuil-logo img{
     display: block;
     margin: auto;
+    width: 100%;
 }
 .acceuil-logo p {
     font-size: 25px;
@@ -38,4 +39,31 @@ a{
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
+}
+
+@media (max-width: 750px) {
+    .acceuil-container{
+        flex-direction: column;
+        width: 100%;
+        margin: auto;
+        margin-top: 15%;
+        padding-bottom: 100px;
+    }
+
+    .acceuil-logo{
+        width: 90%;
+        margin: auto;
+    }
+    .acceuil-logo img{
+        width: 100%;
+        margin: auto;
+    }
+
+    .acceuil-txt{
+        width: 90%;
+        margin: auto;
+    }
+    .bouton-decouverte{
+        margin: 0;
+    }
 }
