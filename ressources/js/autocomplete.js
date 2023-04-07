@@ -32,7 +32,8 @@ function callback(xhr) {
                     .then(data => {
                         if (communes.includes(data.features[0].properties.city)) {
                             city = data.features[0].properties.city;
-                            communesSelectionneesArrivee = ["Votre position"].concat(communesSelectionneesArrivee);
+                            communesSelectionneesArrivee[0] = city
+                            communesSelectionneesArrivee.concat(communesSelectionneesArrivee);
                             if (inputVilleArrivee.value.length >= 2) {
                                 afficheVilles(communesSelectionneesArrivee, divAutocompletionArrivee);
                             }
@@ -61,7 +62,8 @@ function callback(xhr) {
                     .then(data => {
                         if (communes.includes(data.features[0].properties.city)) {
                             city = data.features[0].properties.city;
-                            communesSelectionneesDepart = ["Votre position"].concat(communesSelectionneesDepart);
+                            communesSelectionneesDepart[0] = city
+                            communesSelectionneesDepart.concat(communesSelectionneesDepart);
                             if (inputVilleDepart.value.length >= 2) {
                                 afficheVilles(communesSelectionneesDepart, divAutocompletionDepart);
                             }

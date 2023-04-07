@@ -116,7 +116,7 @@ div#autoCompletionDepart.autoCompletionDepart {
 }
 
 .ConteneurAutoCompletionArrivee {
-    display:inline;
+    display:inline-block;
     vertical-align: top;
 }
 
