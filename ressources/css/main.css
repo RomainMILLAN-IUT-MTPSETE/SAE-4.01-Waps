@@ -69,6 +69,9 @@ main{
     .nav__mobile{
         left: 0;
     }
+    .nav__mobile_open{
+        display: none;
+    }
 }
 .nav__mobile{
     background-color: #f7eeff;
@@ -80,7 +83,7 @@ main{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    z-index: 1;
+    z-index: 5;
 }
 .nav__mobile img {
     height: 35px;
@@ -92,4 +95,55 @@ main{
     margin-left: 5%;
 }
 .nav__mobile a:first-child img{
+}
+
+
+.nav__mobile_open {
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    height: 170px;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    left: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: none;
+}
+.nav__mobile_open nav{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0px;
+}
+.nav__mobile_open nav .nav__mobile_row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.nav__mobile_open nav .nav__mobile_row a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.nav__mobile_open nav .nav__mobile_connect{
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+.nav__mobile_close{
+    position: fixed;
+    bottom: 0;
+    height: 25px;
+    z-index: 15;
+    right: 0;
+    margin-bottom: 15px;
+    margin-right: 15px;
 }

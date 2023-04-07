@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../ressources/css/footer.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
     <link rel="shortcut icon" href="../ressources/img/icone.svg" type="image/x-icon">
+    <script type="text/javascript" src="../ressources/js/menu.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -41,9 +42,34 @@
             }
             ?>
         </nav>
+        <div class="nav__mobile_open" id="nav__mobile_open">
+            <nav>
+                <div class="nav__mobile_row">
+                    <a href="controleurFrontal.php?action=afficherListe&controleur=noeudCommune"><img src="../ressources/img/home.svg" alt="Icone home"><p>Communes</p></a>
+                    <a href="controleurFrontal.php?action=plusCourtChemin&controleur=noeudCommune"><img src="../ressources/img/carte.svg" alt="Icone carte"><p>Carte</p></a>
+                    <?php
+                    if(ConnexionUtilisateur::estConnecte()){
+                        $loginHTML = htmlspecialchars(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+                        $loginURL = rawurlencode(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+                        echo <<<HTML
+                        <a href="controleurFrontal.php?action=afficherDetail&controleur=utilisateur&login=$loginURL"><img src="../ressources/img/profil.svg" alt="Icone profil"><p>Profil</p></a>
+                        HTML;
+                    }
+                    ?>
+                </div>
+                <?php
+                if (!ConnexionUtilisateur::estConnecte()) {
+                    echo <<<HTML
+                    <a class="nav__mobile_connect" href="controleurFrontal.php?action=afficherFormulaireConnexion&controleur=utilisateur"><button class="nav_button">Connexion</button></a>
+                    HTML;
+                }
+                ?>
+            </nav>
+            <a href="#" class="nav__mobile_close" id="nav__mobile_close_menu"><img src="../ressources/img/mobilemenuclose.svg" alt="Icone menu close"></a>
+        </div>
         <div class="nav__mobile">
             <a href="controleurFrontal.php?action=plusCourtChemin&controleur=noeudCommune"><img src="../ressources/img/icone.svg" alt="Icone Waps"></a>
-            <a href="#"><img src="../ressources/img/mobilemenu.svg" alt="Icone Waps"></a>
+            <a href="#"><img onclick="" id="nav__mobile_open_menu" src="../ressources/img/mobilemenu.svg" alt="Icone Waps"></a>
         </div>
     </header>
     <div>
