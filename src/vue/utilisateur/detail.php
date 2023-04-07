@@ -22,9 +22,13 @@ $loginURL = rawurlencode($login);
     <div class="history">
         <h2>Historique des recherches:</h2>
         <div class="history-list">
-            <span><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>Montpellier → Sète: 4km</p></span>
-            <span><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>Montpellier → Sète: 4km</p></span>
-            <span><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>Montpellier → Sète: 4km</p></span>
+            <?php
+            foreach ($historique as $item){
+                ?>
+                <span><img src="../ressources/img/icone.svg" alt="Icone Waps"><p><?= $item[0] ?> → <?= $item[1] ?>: <?= $item[2] ?>km</p></span>
+                <?php
+            }
+            ?>
         </div>
     </div>
 </div>

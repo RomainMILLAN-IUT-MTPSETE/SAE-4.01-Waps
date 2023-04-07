@@ -4,6 +4,7 @@ namespace App\PlusCourtChemin\Controleur;
 
 use App\PlusCourtChemin\Configuration\Configuration;
 use App\PlusCourtChemin\Lib\ConnexionUtilisateur;
+use App\PlusCourtChemin\Lib\Historique;
 use App\PlusCourtChemin\Lib\MessageFlash;
 use App\PlusCourtChemin\Lib\MotDePasse;
 use App\PlusCourtChemin\Lib\VerificationEmail;
@@ -35,12 +36,14 @@ class ControleurUtilisateur extends ControleurGenerique
         if (isset($_REQUEST['login'])) {
             $login = $_REQUEST['login'];
             $utilisateur = (new UtilisateurRepository())->recupererParClePrimaire($login);
+            $historique = Historique::lireHistorique();
             if ($utilisateur === null) {
                 MessageFlash::ajouter("warning", "Login inconnu.");
                 ControleurUtilisateur::rediriger("utilisateur", "afficherListe");
             } else {
                 ControleurUtilisateur::afficherVue('vueGenerale.php', [
                     "utilisateur" => $utilisateur,
+                    "historique" => $historique,
                     "pagetitle" => "Détail de l'utilisateur",
                     "cheminVueBody" => "utilisateur/detail.php"
                 ]);

@@ -2,6 +2,7 @@
 
 namespace App\PlusCourtChemin\Controleur;
 
+use App\PlusCourtChemin\Lib\Historique;
 use App\PlusCourtChemin\Lib\MessageFlash;
 use App\PlusCourtChemin\Lib\PlusCourtChemin;
 use App\PlusCourtChemin\Modele\DataObject\NoeudCommune;
@@ -90,6 +91,8 @@ class ControleurNoeudCommune extends ControleurGenerique
 
             $pcc = new PlusCourtChemin($noeudRoutierDepartGid, $noeudRoutierArriveeGid, $noeudRoutierRepository);
             $distance = $pcc->calculer();
+
+            Historique::ajouter($nomCommuneDepart, $nomCommuneArrivee, $distance);
 
             $parametres["nomCommuneDepart"] = $nomCommuneDepart;
             $parametres["nomCommuneArrivee"] = $nomCommuneArrivee;
