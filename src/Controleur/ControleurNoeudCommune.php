@@ -77,9 +77,19 @@ class ControleurNoeudCommune extends ControleurGenerique
 
             $noeudCommuneRepository = new NoeudCommuneRepository();
             /** @var NoeudCommune $noeudCommuneDepart */
-            $noeudCommuneDepart = $noeudCommuneRepository->recupererPar(["nom_comm" => $nomCommuneDepart])[0];
+            $noeudCommuneDepartRepo = $noeudCommuneRepository->recupererPar(["nom_comm" => $nomCommuneDepart]);
+            if($noeudCommuneDepartRepo == null){
+                MessageFlash::ajouter("danger", "Commune ".$nomCommuneDepart." inconnue");
+                ControleurNoeudCommune::rediriger("noeudCommune", "plusCourtChemin");
+            }
+            $noeudCommuneDepart = $noeudCommuneDepartRepo[0];
             /** @var NoeudCommune $noeudCommuneArrivee */
-            $noeudCommuneArrivee = $noeudCommuneRepository->recupererPar(["nom_comm" => $nomCommuneArrivee])[0];
+            $noeudCommuneArriveeRepo = $noeudCommuneRepository->recupererPar(["nom_comm" => $nomCommuneArrivee]);
+            if($noeudCommuneArriveeRepo == null){
+                MessageFlash::ajouter("danger", "Commune ".$nomCommuneArrivee." inconnue");
+                ControleurNoeudCommune::rediriger("noeudCommune", "plusCourtChemin");
+            }
+            $noeudCommuneArrivee = $noeudCommuneArriveeRepo[0];
 
             $noeudRoutierRepository = new NoeudRoutierRepository();
             $noeudRoutierDepartGid = $noeudRoutierRepository->recupererPar([
