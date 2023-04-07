@@ -59,7 +59,7 @@ main{
 
 @media (min-width: 750px) {
     .nav__mobile{
-        display: none;
+        left: -1000vw;
     }
 }
 @media (max-width: 750px) {
@@ -67,14 +67,12 @@ main{
         display: none;
     }
     .nav__mobile{
-        display: block;
-        position: fixed;
+        left: 0;
     }
 }
 .nav__mobile{
     background-color: #f7eeff;
     position: fixed;
-    left: 0;
     bottom: 0;
     height: 70px;
     width: 100%;
