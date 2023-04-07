@@ -17,18 +17,46 @@ function callback(xhr){
     inputVilleArrivee.addEventListener(`input`, (e) => {
         const value = e.target.value;
         videVilles(divAutocompletionArrivee);
-        const communesSelectionnees = communes.filter((commune) => {
+        let communesSelectionnees = Array.from(communes).filter((commune) => {
             return commune.toLowerCase().startsWith(value.toLowerCase());
         }).slice(0, 5);
-        afficheVilles(communesSelectionnees, divAutocompletionArrivee);
+        console.log(communesSelectionnees);
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition((pos) => {
+                fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${pos.coords.longitude}&lat=${pos.coords.latitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        city = data.features[0].properties.city;
+                        communesSelectionnees = ["Votre position"].concat(communesSelectionnees);
+                        afficheVilles(communesSelectionnees, divAutocompletionArrivee);
+                    })
+                    .catch(error => console.log(error));
+            });
+        }else{
+            afficheVilles(communesSelectionnees, divAutocompletionArrivee);
+        }
     });
     inputVilleDepart.addEventListener(`input`, (e) => {
         const value = e.target.value;
         videVilles(divAutocompletionDepart);
-        const communesSelectionnees = communes.filter((commune) => {
+        let communesSelectionnees = Array.from(communes).filter((commune) => {
             return commune.toLowerCase().startsWith(value.toLowerCase());
         }).slice(0, 5);
-        afficheVilles(communesSelectionnees, divAutocompletionDepart);
+        console.log(communesSelectionnees);
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition((pos) => {
+                fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${pos.coords.longitude}&lat=${pos.coords.latitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        city = data.features[0].properties.city;
+                        communesSelectionnees = ["Votre position"].concat(communesSelectionnees);
+                        afficheVilles(communesSelectionnees, divAutocompletionDepart);
+                    })
+                    .catch(error => console.log(error));
+            });
+        }else{
+            afficheVilles(communesSelectionnees, divAutocompletionDepart);
+        }
     });
 }
 
@@ -50,4 +78,5 @@ function afficheVilles(villes, target){
  * - Afficher villes que si la longueur de la value des inputs >= 2
  * - Remplissage de l'input quand l'utilisateur clique sur le champ 
  * - Sélection du champ avec les flèches du clavier (faire avec les keycode === numéroDeLaTouche et pas keycode = 'ArrowDown' ou 'ArrowUp);
+ * - La valeur de l'input prend la ville actuelle de l'utilisateur (stockée dans city) lors du clic sur le champ "Votre position" de la div autoCompletion
  */
