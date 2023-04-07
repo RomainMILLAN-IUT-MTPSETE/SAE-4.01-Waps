@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../ressources/css/detailCommune.css">
+<a class="returnDetailCommune" href="controleurFrontal.php?action=afficherListe&controleur=noeudCommune"><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>Retourner à la liste des communes</p></a>
 
 <div class="detailCommune-container">
-    <a href="controleurFrontal.php?action=afficherListe&controleur=noeudCommune"><img src="../ressources/img/icone.svg" alt="Icone Waps"><p>Retourner à la liste des communes</p></a>
     <h2><?= $noeudCommune->getNomCommune() ?></h2>
 
     <div class="detailCommune-content">
