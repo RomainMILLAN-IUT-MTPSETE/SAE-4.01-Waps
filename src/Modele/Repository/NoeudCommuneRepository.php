@@ -62,7 +62,7 @@ class NoeudCommuneRepository extends AbstractRepository
         return $res;
     }
 
-    public function getNomsCommunesJSON(): void{
+    public function getNomsCommunesJSON(): array{
         $requeteSQL = "SELECT nom_comm FROM noeud_commune";
         $pdoStatement = ConnexionBaseDeDonnees::getPdo()->prepare($requeteSQL);
         $pdoStatement->execute();
@@ -71,7 +71,7 @@ class NoeudCommuneRepository extends AbstractRepository
         while ($row = $pdoStatement->fetch(PDO::FETCH_ASSOC)) {
             $communes[] = $row['nom_comm'];
         }
-        echo(json_encode($communes));
+        return $communes;
     }
 
 }
