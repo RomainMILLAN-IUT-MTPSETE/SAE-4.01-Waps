@@ -85,4 +85,8 @@ class ControleurNoeudCommune extends ControleurGenerique
 
         ControleurNoeudCommune::afficherVue('vueGenerale.php', $parametres);
     }
+
+    public static function getNomsCommunesJSON(){
+        return (new NoeudCommuneRepository)->getNomsCommunesJSON();
+    }
 }
