@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
     <link rel="shortcut icon" href="../ressources/img/icone.svg" type="image/x-icon">
-    <script type="text/javascript" src="../ressources/js/autocomplete.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 </head>
 <body>

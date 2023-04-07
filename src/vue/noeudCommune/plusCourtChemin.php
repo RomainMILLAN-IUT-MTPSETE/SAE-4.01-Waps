@@ -1,6 +1,5 @@
-<link rel="text/javascript">
 <link rel="stylesheet" href="../ressources/css/plusCourtChemin.css">
-
+<script type="text/javascript" src="../ressources/js/autocomplete.js" defer></script>
 <div class="choose">
     <h2 class="choose_title">Choisissez votre itinéraire !</h2>
 
