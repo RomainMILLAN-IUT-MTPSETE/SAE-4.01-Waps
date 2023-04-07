@@ -8,10 +8,12 @@
         <h2 class="choose_title">Choisissez votre itinéraire !</h2>
         <form action="" method="post" autocomplete="off">
             <div class="inputDiv">
-                <p class="Input-label" for="nomCommuneDepart_id">Point de départ</p>
+                  <p class="Input-label" for="nomCommuneDepart_id">Point de départ</p>
+                <div class="ConteneurAutoCompletion">
                 <input class="Input-field" type="text" value="" placeholder="Ex : Sète" name="nomCommuneDepart" id="nomCommuneDepart_id" required>
+                <div class="autoCompletionDepart" id="autoCompletionDepart"></div>
             </div>
-            <div class="autoCompletionDepart" id="autoCompletionDepart"></div>
+        </div>
             <div class="inputDiv">
                 <p class="Input-label" for="nomCommuneArrivee_id">Point d’arrivée</p>
                 <input class="Input-field" type="text" value="" placeholder="Ex : Montpellier" name="nomCommuneArrivee" id="nomCommuneArrivee_id" required>

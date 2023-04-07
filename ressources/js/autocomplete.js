@@ -51,13 +51,17 @@ function callback(xhr){
                         if(communes.includes(data.features[0].properties.city)){
                             city = data.features[0].properties.city;
                             communesSelectionnees = ["Votre position"].concat(communesSelectionnees);
-                            afficheVilles(communesSelectionnees, divAutocompletionDepart);
+                            if (inputVilleDepart.value.length >= 2) {
+                                afficheVilles(communesSelectionnees, divAutocompletionDepart);
+                            }
                         }
                     })
                     .catch(error => console.log(error));
             });
         }else{
-            afficheVilles(communesSelectionnees, divAutocompletionDepart);
+            if (inputVilleDepart.value.length >= 2) {
+                afficheVilles(communesSelectionnees, divAutocompletionDepart);
+            }
         }
     });
 }
@@ -74,6 +78,8 @@ function afficheVilles(villes, target){
         target.appendChild(temp);
     }
 }
+
+
 
 /**
  * A faire:
