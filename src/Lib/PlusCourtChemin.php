@@ -29,10 +29,6 @@ class PlusCourtChemin {
         $parcours = [];
         while (!$frontiere->isEmpty()) {
             $noeudRoutierGidCourant = $frontiere->extract();
-            $parcours[] = [
-                'latitude' => $this->noeudRoutierRepository->getLatitudeLongitude($noeudRoutierGidCourant)["latitude"],
-                'longitude' => $this->noeudRoutierRepository->getLatitudeLongitude($noeudRoutierGidCourant)["longitude"]
-            ];
             if ($noeudRoutierGidCourant === $noeudRoutierArriveeGid){ 
                 return [
                     'distances' => $this->distances[$noeudRoutierGidCourant],
@@ -48,6 +44,10 @@ class PlusCourtChemin {
                     $this->distances[$noeudVoisinGid] = $distanceProposee;
                     $this->heuristique[$noeudVoisinGid] = $this->calculerHeuristique($voisin["latitude"], $voisin["longitude"]);
                     $frontiere->insert($noeudVoisinGid, -($distanceProposee + $this->heuristique[$noeudVoisinGid]));
+                    $parcours[] = [
+                        'latitude' => $voisin["latitude"],
+                        'longitude' => $voisin["longitude"]
+                    ];
                 }
             }
         }

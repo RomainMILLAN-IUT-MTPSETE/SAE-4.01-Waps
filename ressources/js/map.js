@@ -37,8 +37,17 @@ function callbackPCC(xhr){
     inputCommuneDepart.value = "";
     data = JSON.parse(xhr.responseText);
     let p = document.createElement('p');
-    p.innerHTML = `Le trajet entre ${data.nomCommuneDepart} et ${data.nomCommuneArrivee} mesure ${(data.distance).toFixed(2)} km. Le calcul a duré ${duration.toFixed(2)} secondes.`;
+    p.innerHTML = `Le trajet entre ${data.nomCommuneDepart} et ${data.nomCommuneArrivee} mesure ${(data.distance).toFixed(2)} km.`;
     divResults.appendChild(p);
+    let p2 = document.createElement('p');
+    p2.innerHTML = `Le calcul du trajet a duré ${duration.toFixed(2)} secondes.`;
+    divResults.appendChild(p2);
+    let points = [];
+    for (let i = 0; i < data.parcours.length; i++) {
+        let point = [data.parcours[i].latitude, data.parcours[i].longitude];
+        points.push(point);
+    }
+    let line = L.polyline(points, {color: 'red'}).addTo(map);
 }
 
 function videResults(){
