@@ -19,21 +19,25 @@ class PlusCourtChemin {
     ) {
     }
 
-    public function calculer(): ?float {
-        $start = microtime(true);
+    public function calculer(): ?array {
         $noeudRoutierDepartGid = $this->noeudRoutierDepart->getGid();
         $noeudRoutierArriveeGid = $this->noeudRoutierArrivee->getGid();
         $this->distances = [$noeudRoutierDepartGid => 0];
         $this->heuristique[$noeudRoutierDepartGid] = $this->calculerHeuristique($this->noeudRoutierDepart->getLatitude(), $this->noeudRoutierDepart->getLongitude());
         $frontiere = new SplPriorityQueue();
         $frontiere->insert($noeudRoutierDepartGid, -$this->heuristique[$noeudRoutierDepartGid]);
+        $parcours = [];
         while (!$frontiere->isEmpty()) {
             $noeudRoutierGidCourant = $frontiere->extract();
+            $parcours[] = [
+                'latitude' => $this->noeudRoutierRepository->getLatitudeLongitude($noeudRoutierGidCourant)["latitude"],
+                'longitude' => $this->noeudRoutierRepository->getLatitudeLongitude($noeudRoutierGidCourant)["longitude"]
+            ];
             if ($noeudRoutierGidCourant === $noeudRoutierArriveeGid){ 
-                $end = microtime(true);
-                $time = $end - $start;
-                Cookie::enregistrer("temps_calcul", round($time, 2), 2000);
-                return $this->distances[$noeudRoutierGidCourant];
+                return [
+                    'distances' => $this->distances[$noeudRoutierGidCourant],
+                    'parcours' => $parcours
+                ];
             }
             $voisins = $this->noeudRoutierRepository->getVoisins($noeudRoutierGidCourant);
             foreach ($voisins as $voisin) {
@@ -48,6 +52,7 @@ class PlusCourtChemin {
             }
         }
     }
+    
 
     private function calculerHeuristique($latitude, $longitude): float {
         $longitudeArrivee = $this->noeudRoutierArrivee->getLongitude();

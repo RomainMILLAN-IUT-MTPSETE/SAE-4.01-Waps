@@ -101,7 +101,8 @@ class ControleurNoeudCommune extends ControleurGenerique
             ])[0];
 
             $pcc = new PlusCourtChemin($noeudRoutierDepartGid, $noeudRoutierArriveeGid, $noeudRoutierRepository);
-            $distance = $pcc->calculer();
+            $calculer = $pcc->calculer();
+            $distance = $calculer["distances"];
 
             if(ConnexionUtilisateur::estConnecte()){
                 Historique::ajouter($nomCommuneDepart, $nomCommuneArrivee, $distance);

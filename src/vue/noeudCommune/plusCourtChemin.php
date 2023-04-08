@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- <input type="hidden" name="XDEBUG_TRIGGER"> -->
-            <input class="Input-submit" type="submit" value="Calculer"/>
+            <input class="Input-submit" type="submit"/>
         </form>
     </div>
     <div class="pcc-resultat">
