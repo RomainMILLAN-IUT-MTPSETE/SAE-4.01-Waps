@@ -102,18 +102,18 @@ class ControleurNoeudCommune extends ControleurGenerique
 
             $pcc = new PlusCourtChemin($noeudRoutierDepartGid, $noeudRoutierArriveeGid, $noeudRoutierRepository);
             $calculer = $pcc->calculer();
-            $distance = $calculer["distances"];
 
             if(ConnexionUtilisateur::estConnecte()){
-                Historique::ajouter($nomCommuneDepart, $nomCommuneArrivee, $distance);
+                Historique::ajouter($nomCommuneDepart, $nomCommuneArrivee, $calculer["distances"]);
             }
 
             $parametres["nomCommuneDepart"] = $nomCommuneDepart;
             $parametres["nomCommuneArrivee"] = $nomCommuneArrivee;
-            $parametres["distance"] = $distance;
-        }
+            $parametres["distance"] = $calculer["distances"];
+            $parametres["parcours"] = $calculer["parcours"];
 
-        ControleurNoeudCommune::afficherVue('vueGenerale.php', $parametres);
+            echo(json_encode($parametres));
+        }
     }
 
     public static function getNomsCommunesJSON(): void{
