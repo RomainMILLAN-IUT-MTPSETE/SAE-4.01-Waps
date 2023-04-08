@@ -98,6 +98,7 @@ function afficheVilles(villes, target){
 inputVilleDepart.addEventListener(`keydown`, (e) => {
     switch (e.keyCode) {
         case 38:
+            e.preventDefault();
             if(currentFocusDepart !== 0){
                 document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "white";
                 currentFocusDepart--;
@@ -105,6 +106,7 @@ inputVilleDepart.addEventListener(`keydown`, (e) => {
             }
             break;
         case 40:
+            e.preventDefault();
             if(navigator.geolocation){
                 if(currentFocusDepart !== 5){
                     document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "white";
@@ -120,6 +122,7 @@ inputVilleDepart.addEventListener(`keydown`, (e) => {
             }
             break;
         case 13:
+            e.preventDefault();
             document.getElementById(`champ-ville-${currentFocusDepart}`).innerText = `Votre position` ? inputVilleDepart.value = city : inputVilleDepart.value = document.getElementById(`champ-ville-${currentFocusDepart}`).innerText;
             videVilles(divAutocompletionDepart);
             break;
@@ -132,6 +135,7 @@ inputVilleArrivee.addEventListener(`keydown`, (e) => {
     console.log("keydown", e);
     switch (e.keyCode) {
         case 38:
+            e.preventDefault();
             if(currentFocusArrivee !== 0){
                 document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "white";
                 currentFocusArrivee--;
@@ -139,6 +143,7 @@ inputVilleArrivee.addEventListener(`keydown`, (e) => {
             }
             break;
         case 40:
+            e.preventDefault();
             if(navigator.geolocation){
                 if(currentFocusArrivee !== 5){
                     document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "white";
@@ -154,6 +159,7 @@ inputVilleArrivee.addEventListener(`keydown`, (e) => {
             }
             break;
         case 13:
+            e.preventDefault();
             document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText = `Votre position` ? inputVilleArrivee.value = city : inputVilleArrivee.value = document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText;
             videVilles(divAutocompletionArrivee);
             break;
