@@ -15,11 +15,12 @@ submitButton.addEventListener(`click`, (e) => {
 
     const xhr = new XMLHttpRequest();
     xhr.timeout = 300000;
-    xhr.open('GET', `controleurFrontal.php?controleur=noeudCommune&action=plusCourtChemin&nomCommuneDepart=${encodeURIComponent(nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(nomCommuneArrivee)}`, true);
-    xhr.onload = function () {
+    xhr.open('POST', `controleurFrontal.php?controleur=noeudCommune&action=plusCourtChemin`);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log(JSON.parse(xhr.responseText));
         }
     };
-    xhr.send(null);
+    xhr.send(`nomCommuneDepart=${encodeURIComponent(nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(nomCommuneArrivee)}`);
 });

@@ -73,9 +73,9 @@ class ControleurNoeudCommune extends ControleurGenerique
 
     public static function plusCourtChemin(): void
     {
-        if (!empty($_GET)) {
-            $nomCommuneDepart = $_GET["nomCommuneDepart"];
-            $nomCommuneArrivee = $_GET["nomCommuneArrivee"];
+        if (!empty($_POST)) {
+            $nomCommuneDepart = $_POST["nomCommuneDepart"];
+            $nomCommuneArrivee = $_POST["nomCommuneArrivee"];
 
             $noeudCommuneRepository = new NoeudCommuneRepository();
             /** @var NoeudCommune $noeudCommuneDepart */
