@@ -32,8 +32,8 @@
         <div class="resultat">
             <?php if (!empty($_POST)) { ?>
                 <p>
-                    Le trajet entre <?= $nomCommuneDepart ?> et <?= $nomCommuneArrivee ?> fait <?= $distance ?>
-                    km. <?php if (App\PlusCourtChemin\Modele\HTTP\Cookie::existeCle("temps_calcul")) echo("<br/>Le temps de calcul à pris " . App\PlusCourtChemin\Modele\HTTP\Cookie::lire("temps_calcul") . " secondes.") ?>
+                    Le trajet entre <?= $nomCommuneDepart ?> et <?= $nomCommuneArrivee ?> fait <?= $distance ?>km. 
+                    <?php if (App\PlusCourtChemin\Modele\HTTP\Cookie::existeCle("temps_calcul")) echo("<br/>Le temps de calcul est de: " . App\PlusCourtChemin\Modele\HTTP\Cookie::lire("temps_calcul") . " secondes.") ?>
                 </p>
             <?php } ?>
         </div>
