@@ -2,8 +2,6 @@ const divAutocompletionDepart = document.getElementById(`autoCompletionDepart`);
 const divAutocompletionArrivee = document.getElementById(`autoCompletionArrivee`);
 const inputVilleDepart = document.getElementById(`nomCommuneDepart_id`);
 const inputVilleArrivee = document.getElementById(`nomCommuneArrivee_id`);
-let currentFocusDepart = 0;
-let currentFocusArrivee = 0;
 
 let xhr = new XMLHttpRequest();
 xhr.open(`GET`, `controleurFrontal.php?controleur=noeudCommune&action=getNomsCommunesJSON`, true);
@@ -96,74 +94,80 @@ function afficheVilles(villes, target){
 }
 
 inputVilleDepart.addEventListener(`keydown`, (e) => {
-    switch (e.keyCode) {
-        case 38:
-            e.preventDefault();
-            if(currentFocusDepart !== 0){
-                document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "white";
-                currentFocusDepart--;
-                document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "#A9BCD0";
-            }
-            break;
-        case 40:
-            e.preventDefault();
-            if(navigator.geolocation){
-                if(currentFocusDepart !== 5){
+    let currentFocusDepart = -1;
+    if(divAutocompletionDepart.hasChildNodes){
+        switch (e.keyCode) {
+            case 38:
+                e.preventDefault();
+                if(currentFocusDepart !== 0){
                     document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "white";
-                    currentFocusDepart++;
+                    currentFocusDepart--;
                     document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "#A9BCD0";
                 }
-            }else {
-                if(currentFocusDepart !== 4){
-                    document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "white";
-                    currentFocusDepart++;
-                    document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "#A9BCD0";
+                break;
+            case 40:
+                e.preventDefault();
+                if(navigator.geolocation){
+                    if(currentFocusDepart !== 5){
+                        document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "white";
+                        currentFocusDepart++;
+                        document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "#A9BCD0";
+                    }
+                }else {
+                    if(currentFocusDepart !== 4){
+                        document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "white";
+                        currentFocusDepart++;
+                        document.getElementById(`champ-ville-${currentFocusDepart}`).style.backgroundColor = "#A9BCD0";
+                    }
                 }
-            }
-            break;
-        case 13:
-            e.preventDefault();
-            document.getElementById(`champ-ville-${currentFocusDepart}`).innerText === `Votre position` ? inputVilleDepart.value = city : inputVilleDepart.value = document.getElementById(`champ-ville-${currentFocusDepart}`).innerText;
-            videVilles(divAutocompletionDepart);
-            break;
-        default:
-            break;
+                break;
+            case 13:
+                e.preventDefault();
+                document.getElementById(`champ-ville-${currentFocusDepart}`).innerText === `Votre position` ? inputVilleDepart.value = city : inputVilleDepart.value = document.getElementById(`champ-ville-${currentFocusDepart}`).innerText;
+                videVilles(divAutocompletionDepart);
+                break;
+            default:
+                break;
+        }
     }
 });
 
 inputVilleArrivee.addEventListener(`keydown`, (e) => {
-    switch (e.keyCode) {
-        case 38:
-            e.preventDefault();
-            if(currentFocusArrivee !== 0){
-                document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "white";
-                currentFocusArrivee--;
-                document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "#A9BCD0";
-            }
-            break;
-        case 40:
-            e.preventDefault();
-            if(navigator.geolocation){
-                if(currentFocusArrivee !== 5){
+    let currentFocusArrivee = -1;
+    if(divAutocompletionArrivee.hasChildNodes){
+        switch (e.keyCode) {
+            case 38:
+                e.preventDefault();
+                if(currentFocusArrivee !== 0){
                     document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "white";
-                    currentFocusArrivee++;
+                    currentFocusArrivee--;
                     document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "#A9BCD0";
                 }
-            }else {
-                if(currentFocusArrivee !== 4){
-                    document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "white";
-                    currentFocusArrivee++;
-                    document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "#A9BCD0";
+                break;
+            case 40:
+                e.preventDefault();
+                if(navigator.geolocation){
+                    if(currentFocusArrivee !== 5){
+                        document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "white";
+                        currentFocusArrivee++;
+                        document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "#A9BCD0";
+                    }
+                }else {
+                    if(currentFocusArrivee !== 4){
+                        document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "white";
+                        currentFocusArrivee++;
+                        document.getElementById(`champ-ville-${currentFocusArrivee}`).style.backgroundColor = "#A9BCD0";
+                    }
                 }
-            }
-            break;
-        case 13:
-            e.preventDefault();
-            document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText === `Votre position` ? inputVilleArrivee.value = city : inputVilleArrivee.value = document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText;
-            videVilles(divAutocompletionArrivee);
-            break;
-        default:
-            break;
+                break;
+            case 13:
+                e.preventDefault();
+                document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText === `Votre position` ? inputVilleArrivee.value = city : inputVilleArrivee.value = document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText;
+                videVilles(divAutocompletionArrivee);
+                break;
+            default:
+                break;
+        }
     }
 });
 
