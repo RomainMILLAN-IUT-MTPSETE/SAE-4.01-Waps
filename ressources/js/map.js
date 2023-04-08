@@ -10,6 +10,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
 }).addTo(map);
 
+var allLayers = L.layerGroup().addTo(map);
+
 submitButton.addEventListener(`click`, (e) => {
     e.preventDefault();
     const nomCommuneDepart = inputCommuneDepart.value;
@@ -33,6 +35,7 @@ submitButton.addEventListener(`click`, (e) => {
 
 function callbackPCC(xhr){
     videResults();
+    videCarte();
     inputCommuneArrivee.value = "";
     inputCommuneDepart.value = "";
     data = JSON.parse(xhr.responseText);
@@ -47,7 +50,11 @@ function callbackPCC(xhr){
         let point = [data.parcours[i].latitude, data.parcours[i].longitude];
         points.push(point);
     }
-    let line = L.polyline(points, {color: 'red'}).addTo(map);
+    let line = L.polyline(points, {color: 'red'}).addTo(allLayers);
+}
+
+function videCarte(){
+    allLayers.remove();
 }
 
 function videResults(){
