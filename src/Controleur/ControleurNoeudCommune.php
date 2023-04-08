@@ -64,17 +64,18 @@ class ControleurNoeudCommune extends ControleurGenerique
         ]);
     }
 
+    public static function pcc(): void {
+        ControleurNoeudCommune::afficherVue('vueGenerale.php', [
+            "pagetitle" => "Détail de la Commune",
+            "cheminVueBody" => "noeudCommune/plusCourtChemin.php"
+        ]);
+    }
+
     public static function plusCourtChemin(): void
     {
-        $parametres = [
-            "pagetitle" => "Calcul de chemin",
-            "cheminVueBody" => "noeudCommune/plusCourtChemin.php",
-        ];
-
-
-        if (!empty($_POST)) {
-            $nomCommuneDepart = $_POST["nomCommuneDepart"];
-            $nomCommuneArrivee = $_POST["nomCommuneArrivee"];
+        if (!empty($_GET)) {
+            $nomCommuneDepart = $_GET["nomCommuneDepart"];
+            $nomCommuneArrivee = $_GET["nomCommuneArrivee"];
 
             $noeudCommuneRepository = new NoeudCommuneRepository();
             /** @var NoeudCommune $noeudCommuneDepart */
