@@ -29,6 +29,6 @@
     </div>
     <div class="pcc-resultat">
         <div class="map" id="map"></div>
-        <div class="resultat"></div>
+        <div class="resultat" id="resultat"></div>
     </div>
 </div>
