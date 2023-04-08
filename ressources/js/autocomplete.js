@@ -173,12 +173,3 @@ document.addEventListener(`click`, (e) => {
         if(divAutocompletionDepart.hasChildNodes) videVilles(divAutocompletionDepart);
     } 
 })
-
-/**
- * A faire:
- * - Afficher villes que si la longueur de la value des inputs >= 2 OK
- * - Remplissage de l'input quand l'utilisateur clique sur le champ OK
- * - Sélection du champ avec les flèches du clavier (faire avec les keycode === numéroDeLaTouche et pas keycode = 'ArrowDown' ou 'ArrowUp); OK
- * - La valeur de l'input prend la ville actuelle de l'utilisateur (stockée dans city) lors du clic sur le champ "Votre position" de la div autoCompletion OK
- * - Fix keycode === 13 rempli input avec position utilisateur
- */
