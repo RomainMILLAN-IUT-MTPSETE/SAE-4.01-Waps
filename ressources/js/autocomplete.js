@@ -123,8 +123,6 @@ inputVilleDepart.addEventListener(`keydown`, (e) => {
             break;
         case 13:
             e.preventDefault();
-            console.log(currentFocusDepart)
-            console.log(document.getElementById(`champ-ville-${currentFocusDepart}`).innerText);
             document.getElementById(`champ-ville-${currentFocusDepart}`).innerText === `Votre position` ? inputVilleDepart.value = city : inputVilleDepart.value = document.getElementById(`champ-ville-${currentFocusDepart}`).innerText;
             videVilles(divAutocompletionDepart);
             break;
@@ -134,7 +132,6 @@ inputVilleDepart.addEventListener(`keydown`, (e) => {
 });
 
 inputVilleArrivee.addEventListener(`keydown`, (e) => {
-    console.log("keydown", e);
     switch (e.keyCode) {
         case 38:
             e.preventDefault();
@@ -162,8 +159,6 @@ inputVilleArrivee.addEventListener(`keydown`, (e) => {
             break;
         case 13:
             e.preventDefault();
-            console.log(currentFocusArrivee);
-            console.log(document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText);
             document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText === `Votre position` ? inputVilleArrivee.value = city : inputVilleArrivee.value = document.getElementById(`champ-ville-${currentFocusArrivee}`).innerText;
             videVilles(divAutocompletionArrivee);
             break;
