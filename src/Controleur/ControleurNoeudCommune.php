@@ -122,11 +122,14 @@ class ControleurNoeudCommune extends ControleurGenerique
             $noeudCommuneArrivee = (new NoeudCommuneRepository)->recupererPar(["nom_comm" => $_POST["nomCommuneArrivee"]])[0];
             $noeudRoutierDepartGid = (new NoeudRoutierRepository)->recupererPar([
                 "id_rte500" => $noeudCommuneDepart->getId_nd_rte()
-            ])[0];
+            ])[0]->getGid();
             $noeudRoutierArriveeGid = (new NoeudRoutierRepository)->recupererPar([
                 "id_rte500" => $noeudCommuneArrivee->getId_nd_rte()
-            ])[0];
-            echo(json_encode(new NoeudRoutierRepository)->getLatitudeLongitude($noeudRoutierDepartGid))
+            ])[0]->getGid();
+            $coords = [];
+            $coords[0] = (new NoeudRoutierRepository)->getLatitudeLongitude($noeudRoutierDepartGid);
+            $coords[1] = (new NoeudRoutierRepository)->getLatitudeLongitude($noeudRoutierArriveeGid);
+            echo(json_encode($coords));
         }
     }
 
