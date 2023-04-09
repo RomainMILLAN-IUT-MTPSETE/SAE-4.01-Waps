@@ -39,18 +39,18 @@ function callbackPCC(xhr){
     inputCommuneArrivee.value = "";
     inputCommuneDepart.value = "";
     data = JSON.parse(xhr.responseText);
+    console.log(data);
     let p = document.createElement('p');
     p.innerHTML = `Le trajet entre ${data.nomCommuneDepart} et ${data.nomCommuneArrivee} mesure ${(data.distance).toFixed(2)} km.`;
     divResults.appendChild(p);
     let p2 = document.createElement('p');
     p2.innerHTML = `Le calcul du trajet a duré ${duration.toFixed(2)} secondes.`;
     divResults.appendChild(p2);
-    let points = [];
-    for (let i = 0; i < data.parcours.length; i++) {
-        let point = [data.parcours[i].latitude, data.parcours[i].longitude];
-        points.push(point);
+    for (let i = 0; i < data.parcours.length-1; i++) {
+        let pointDepart = [data.parcours[i].latitude, data.parcours[i].longitude];
+        let pointArrivee = [data.parcours[i+1].latitude, data.parcours[i+1].longitude];
+        let line = L.polyline([pointDepart, pointArrivee], {color: 'red'}).addTo(allLayers);
     }
-    let line = L.polyline(points, {color: 'red'}).addTo(allLayers);
 }
 
 function videCarte(){

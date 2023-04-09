@@ -26,9 +26,19 @@ class PlusCourtChemin {
         $this->heuristique[$noeudRoutierDepartGid] = $this->calculerHeuristique($this->noeudRoutierDepart->getLatitude(), $this->noeudRoutierDepart->getLongitude());
         $frontiere = new SplPriorityQueue();
         $frontiere->insert($noeudRoutierDepartGid, -$this->heuristique[$noeudRoutierDepartGid]);
+        $noeudParcourus = [];
         $parcours = [];
         while (!$frontiere->isEmpty()) {
             $noeudRoutierGidCourant = $frontiere->extract();
+            foreach ($noeudParcourus as $noeud) {
+                if ($noeud['gid'] === $noeudRoutierGidCourant) {
+                    $parcours[] = [
+                        'latitude' => $noeud['latitude'],
+                        'longitude' => $noeud['longitude']
+                    ];
+                    break;
+                }
+            }
             if ($noeudRoutierGidCourant === $noeudRoutierArriveeGid){ 
                 return [
                     'distances' => $this->distances[$noeudRoutierGidCourant],
@@ -44,7 +54,8 @@ class PlusCourtChemin {
                     $this->distances[$noeudVoisinGid] = $distanceProposee;
                     $this->heuristique[$noeudVoisinGid] = $this->calculerHeuristique($voisin["latitude"], $voisin["longitude"]);
                     $frontiere->insert($noeudVoisinGid, -($distanceProposee + $this->heuristique[$noeudVoisinGid]));
-                    $parcours[] = [
+                    $noeudParcourus[] = [
+                        'gid' => $noeudVoisinGid,
                         'latitude' => $voisin["latitude"],
                         'longitude' => $voisin["longitude"]
                     ];
