@@ -21,7 +21,7 @@ submitButton.addEventListener(`click`, (e) => {
     const nomCommuneArrivee = inputCommuneArrivee.value;
     if (nomCommuneArrivee.value !== "" && nomCommuneArrivee.value !== "") {
         const xhr = new XMLHttpRequest();
-        xhr.timeout = 300000;
+        xhr.timeout = 3000000000;
         let startTime = new Date();
         xhr.open('POST', `controleurFrontal.php?controleur=noeudCommune&action=plusCourtChemin`);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -30,6 +30,8 @@ submitButton.addEventListener(`click`, (e) => {
                 let endTime = new Date();
                 duration = (endTime - startTime) / 1000;
                 callbackPCC(xhr);
+            }else{
+                console.log('Error');
             }
         };
         xhr.send(`nomCommuneDepart=${encodeURIComponent(nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(nomCommuneArrivee)}`);
@@ -82,9 +84,13 @@ function callbackPCC(xhr) {
                         map.fitBounds(bounds);
                     });
                     map.removeControl(routingControl);
+                }else{
+                    console.log('Error');
                 }
             };
             xhr2.send(`nomCommuneDepart=${encodeURIComponent(data.nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(data.nomCommuneArrivee)}`);
+        }else{
+            console.log('Error');
         }
     }
     xhr3.send(`nomCommuneDepart=${encodeURIComponent(data.nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(data.nomCommuneArrivee)}`);
