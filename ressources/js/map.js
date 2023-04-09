@@ -63,12 +63,17 @@ function callbackPCC(xhr) {
                 show: false
             }).addTo(map);
             routingControl.on('routesfound', function (event) {
+                let markerDepart = L.marker([coords[0].latitude, coords[0].longitude]).addTo(map);
+                markerDepart.bindPopup(data.nomCommuneDepart).openPopup();
+                let markerArrivee = L.marker([coords[1].latitude, coords[1].longitude]).addTo(map);
+                markerArrivee.bindPopup(data.nomCommuneArrivee).openPopup();
+                console.log(event.routes[0].coordinates);
                 route = event.routes[0];
                 L.polyline(route.coordinates, { color: 'purple' }).addTo(map);
                 let bounds = L.latLngBounds(route.coordinates);
                 map.fitBounds(bounds);
-                routingControl.remove();
             });
+            map.removeControl(routingControl);
         }
     };
     xhr2.send(`nomCommuneDepart=${encodeURIComponent(data.nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(data.nomCommuneArrivee)}`);
