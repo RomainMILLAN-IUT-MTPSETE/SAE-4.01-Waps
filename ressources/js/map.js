@@ -5,7 +5,9 @@ const inputCommuneArrivee = document.getElementById('nomCommuneArrivee_id');
 const submitButton = document.getElementById('button');
 const divResults = document.getElementById('resultat');
 let duration;
-let route;
+let trajet;
+let markerDepart;
+let markerArrivee;
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -63,13 +65,13 @@ function callbackPCC(xhr) {
                 show: false
             }).addTo(map);
             routingControl.on('routesfound', function (event) {
-                let markerDepart = L.marker([coords[0].latitude, coords[0].longitude]).addTo(map);
+                markerDepart = L.marker([coords[0].latitude, coords[0].longitude]).addTo(map);
                 markerDepart.bindPopup(data.nomCommuneDepart).openPopup();
-                let markerArrivee = L.marker([coords[1].latitude, coords[1].longitude]).addTo(map);
+                markerArrivee = L.marker([coords[1].latitude, coords[1].longitude]).addTo(map);
                 markerArrivee.bindPopup(data.nomCommuneArrivee).openPopup();
                 console.log(event.routes[0].coordinates);
                 route = event.routes[0];
-                L.polyline(route.coordinates, { color: 'purple' }).addTo(map);
+                trajet = L.polyline(route.coordinates, { color: 'purple' }).addTo(map);
                 let bounds = L.latLngBounds(route.coordinates);
                 map.fitBounds(bounds);
             });
@@ -80,7 +82,9 @@ function callbackPCC(xhr) {
 }
 
 function videCarte() {
-    if(route) route.remove();
+    if(trajet) trajet.remove();
+    if(markerDepart) map.removeLayer(markerDepart);
+    if(markerArrivee) map.removeLayer(markerArrivee);
 }
 
 function videResults() {
