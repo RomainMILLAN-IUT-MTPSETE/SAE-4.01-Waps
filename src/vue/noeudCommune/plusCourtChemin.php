@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="../ressources/css/plusCourtChemin.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
 <script type="text/javascript" src="../ressources/js/autocomplete.js" defer></script>
 <script type="text/javascript" src="../ressources/js/map.js" defer></script>
 <div class="pcc-container">

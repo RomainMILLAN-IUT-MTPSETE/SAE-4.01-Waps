@@ -111,9 +111,22 @@ class ControleurNoeudCommune extends ControleurGenerique
             $parametres["nomCommuneDepart"] = $nomCommuneDepart;
             $parametres["nomCommuneArrivee"] = $nomCommuneArrivee;
             $parametres["distance"] = $calculer["distances"];
-            $parametres["parcours"] = $calculer["parcours"];
 
             echo(json_encode($parametres));
+        }
+    }
+
+    public static function getLatitudeLongitude(){
+        if (!empty($_POST)){
+            $noeudCommuneDepart = (new NoeudCommuneRepository)->recupererPar(["nom_comm" => $_POST["nomCommuneDepart"]])[0];
+            $noeudCommuneArrivee = (new NoeudCommuneRepository)->recupererPar(["nom_comm" => $_POST["nomCommuneArrivee"]])[0];
+            $noeudRoutierDepartGid = (new NoeudRoutierRepository)->recupererPar([
+                "id_rte500" => $noeudCommuneDepart->getId_nd_rte()
+            ])[0];
+            $noeudRoutierArriveeGid = (new NoeudRoutierRepository)->recupererPar([
+                "id_rte500" => $noeudCommuneArrivee->getId_nd_rte()
+            ])[0];
+            echo(json_encode(new NoeudRoutierRepository)->getLatitudeLongitude($noeudRoutierDepartGid))
         }
     }
 

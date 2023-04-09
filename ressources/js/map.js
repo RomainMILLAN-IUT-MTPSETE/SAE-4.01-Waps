@@ -16,7 +16,7 @@ submitButton.addEventListener(`click`, (e) => {
     e.preventDefault();
     const nomCommuneDepart = inputCommuneDepart.value;
     const nomCommuneArrivee = inputCommuneArrivee.value;
-    if(nomCommuneArrivee.value !== "" && nomCommuneArrivee.value !== ""){
+    if (nomCommuneArrivee.value !== "" && nomCommuneArrivee.value !== "") {
         const xhr = new XMLHttpRequest();
         xhr.timeout = 300000;
         let startTime = new Date();
@@ -33,30 +33,57 @@ submitButton.addEventListener(`click`, (e) => {
     }
 });
 
-function callbackPCC(xhr){
+function callbackPCC(xhr) {
     videResults();
     videCarte();
     inputCommuneArrivee.value = "";
     inputCommuneDepart.value = "";
+    console.log(xhr.responseText);
     data = JSON.parse(xhr.responseText);
-    console.log(data);
     let p = document.createElement('p');
     p.innerHTML = `Le trajet entre ${data.nomCommuneDepart} et ${data.nomCommuneArrivee} mesure ${(data.distance).toFixed(2)} km.`;
     divResults.appendChild(p);
     let p2 = document.createElement('p');
     p2.innerHTML = `Le calcul du trajet a duré ${duration.toFixed(2)} secondes.`;
     divResults.appendChild(p2);
-    for (let i = 0; i < data.parcours.length-1; i++) {
-        let pointDepart = [data.parcours[i].latitude, data.parcours[i].longitude];
-        let pointArrivee = [data.parcours[i+1].latitude, data.parcours[i+1].longitude];
-        let line = L.polyline([pointDepart, pointArrivee], {color: 'red'}).addTo(allLayers);
-    }
+    let coordsArrivee = [];
+    let coordsDepart = [];
+    fetch(`https://api.ign.fr/geoportail/autocomplete?text=${data.nomCommuneDepart}&type=PositionOfInterestAddress&maximumResponses=1&territory=METROPOLIS&geometryFormat=WKT&returnFreeForm=false&returnGeometry=true`)
+        .then(response => response.json())
+        .then(json => {
+            if (json.features.length > 0) {
+                let coordinates = json.features[0].geometry.coordinates;
+                coordsDepart = [coordinates[1], coordinates[0]];
+            }
+        });
+    fetch(`https://api.ign.fr/geoportail/autocomplete?text=${data.nomCommuneArrivee}&type=PositionOfInterestAddress&maximumResponses=1&territory=METROPOLIS&geometryFormat=WKT&returnFreeForm=false&returnGeometry=true`)
+        .then(response => response.json())
+        .then(json => {
+            if (json.features.length > 0) {
+                let coordinates = json.features[0].geometry.coordinates;
+                coordsArrivee = [coordinates[1], coordinates[0]];
+            }
+        });
+    console.log(coordsArrivee);
+    console.log(coordsDepart);
+    let routingControl = L.Routing.control({
+        waypoints: [
+            L.latLng(coordsDepart[1], coordsDepart[0]),
+            L.latLng(coordsArrivee[1], coordsArrivee[0])
+        ],
+        routeWhileDragging: true,
+        show: false
+    }).addTo(map);
+    routingControl.on('routesfound', function(event) {
+        let route = event.routes[0];
+        L.polyline(route.coordinates, {color: 'blue'}).addTo(map);
+    });
 }
 
-function videCarte(){
+function videCarte() {
     allLayers.remove();
 }
 
-function videResults(){
+function videResults() {
     while (divResults.hasChildNodes()) divResults.removeChild(divResults.firstChild);
 }
