@@ -43,48 +43,59 @@ function callbackPCC(xhr) {
     inputCommuneDepart.value = "";
     data = JSON.parse(xhr.responseText);
     let p = document.createElement('p');
-    p.innerHTML = `Le trajet entre ${data.nomCommuneDepart} et ${data.nomCommuneArrivee} mesure ${(data.distance).toFixed(2)} km.`;
-    divResults.appendChild(p);
-    let p2 = document.createElement('p');
-    p2.innerHTML = `Le calcul du trajet a duré ${duration.toFixed(2)} secondes.`;
-    divResults.appendChild(p2);
-    let coords;
-    const xhr2 = new XMLHttpRequest();
-    xhr2.timeout = 300000;
-    xhr2.open('POST', `controleurFrontal.php?controleur=noeudCommune&action=getLatitudeLongitude`);
-    xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr2.onload = () => {
-        if (xhr2.readyState === 4 && xhr2.status === 200) {
-            coords = JSON.parse(xhr2.responseText);
-            let routingControl = L.Routing.control({
-                waypoints: [
-                    L.latLng(coords[0].latitude, coords[0].longitude),
-                    L.latLng(coords[1].latitude, coords[1].longitude)
-                ],
-                routeWhileDragging: true,
-                show: false
-            }).addTo(map);
-            routingControl.on('routesfound', function (event) {
-                markerDepart = L.marker([coords[0].latitude, coords[0].longitude]).addTo(map);
-                markerDepart.bindPopup(data.nomCommuneDepart).openPopup();
-                markerArrivee = L.marker([coords[1].latitude, coords[1].longitude]).addTo(map);
-                markerArrivee.bindPopup(data.nomCommuneArrivee).openPopup();
-                console.log(event.routes[0].coordinates);
-                route = event.routes[0];
-                trajet = L.polyline(route.coordinates, { color: 'purple' }).addTo(map);
-                let bounds = L.latLngBounds(route.coordinates);
-                map.fitBounds(bounds);
-            });
-            map.removeControl(routingControl);
+    const xhr3 = new XMLHttpRequest();
+    xhr3.timeout = 300000;
+    xhr3.open('POST', `controleurFrontal.php?controleur=noeudCommune&action=getGid`);
+    xhr3.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr3.onload = () => {
+        if (xhr3.readyState === 4 && xhr3.status === 200) {
+            gids = JSON.parse(xhr3.responseText);
+            console.log(gids[0]);
+            console.log(gids[1]);
+            p.innerHTML = `Le trajet entre <a href="controleurFrontal.php?controleur=noeudCommune&action=afficherDetail&gid=${gids[0]}">${data.nomCommuneDepart}</a> et <a href="controleurFrontal.php?controleur=noeudCommune&action=afficherDetail&gid=${gids[1]}">${data.nomCommuneArrivee}</a> mesure ${(data.distance).toFixed(2)} km.`;
+            divResults.appendChild(p);
+            let p2 = document.createElement('p');
+            p2.innerHTML = `Le calcul du trajet a duré ${duration.toFixed(2)} secondes.`;
+            divResults.appendChild(p2);
+            let coords;
+            const xhr2 = new XMLHttpRequest();
+            xhr2.timeout = 300000;
+            xhr2.open('POST', `controleurFrontal.php?controleur=noeudCommune&action=getLatitudeLongitude`);
+            xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr2.onload = () => {
+                if (xhr2.readyState === 4 && xhr2.status === 200) {
+                    coords = JSON.parse(xhr2.responseText);
+                    let routingControl = L.Routing.control({
+                        waypoints: [
+                            L.latLng(coords[0].latitude, coords[0].longitude),
+                            L.latLng(coords[1].latitude, coords[1].longitude)
+                        ],
+                        routeWhileDragging: true,
+                        show: false
+                    }).addTo(map);
+                    routingControl.on('routesfound', function (event) {
+                        markerDepart = L.marker([coords[0].latitude, coords[0].longitude]).addTo(map);
+                        markerDepart.bindPopup(data.nomCommuneDepart).openPopup();
+                        markerArrivee = L.marker([coords[1].latitude, coords[1].longitude]).addTo(map);
+                        markerArrivee.bindPopup(data.nomCommuneArrivee).openPopup();
+                        route = event.routes[0];
+                        trajet = L.polyline(route.coordinates, { color: 'purple' }).addTo(map);
+                        let bounds = L.latLngBounds(route.coordinates);
+                        map.fitBounds(bounds);
+                    });
+                    map.removeControl(routingControl);
+                }
+            };
+            xhr2.send(`nomCommuneDepart=${encodeURIComponent(data.nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(data.nomCommuneArrivee)}`);
         }
-    };
-    xhr2.send(`nomCommuneDepart=${encodeURIComponent(data.nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(data.nomCommuneArrivee)}`);
+    }
+    xhr3.send(`nomCommuneDepart=${encodeURIComponent(data.nomCommuneDepart)}&nomCommuneArrivee=${encodeURIComponent(data.nomCommuneArrivee)}`);
 }
 
 function videCarte() {
-    if(trajet) trajet.remove();
-    if(markerDepart) map.removeLayer(markerDepart);
-    if(markerArrivee) map.removeLayer(markerArrivee);
+    if (trajet) trajet.remove();
+    if (markerDepart) map.removeLayer(markerDepart);
+    if (markerArrivee) map.removeLayer(markerArrivee);
 }
 
 function videResults() {

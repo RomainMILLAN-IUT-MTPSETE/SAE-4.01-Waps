@@ -135,17 +135,11 @@ class ControleurNoeudCommune extends ControleurGenerique
 
     public static function getGid(){
         if(!empty($_POST)){
-            $noeudCommuneDepart = (new NoeudCommuneRepository)->recupererPar(["nom_comm" => $_POST["nomCommuneDepart"]])[0];
-            $noeudCommuneArrivee = (new NoeudCommuneRepository)->recupererPar(["nom_comm" => $_POST["nomCommuneArrivee"]])[0];
-            $noeudRoutierDepartGid = (new NoeudRoutierRepository)->recupererPar([
-                "id_rte500" => $noeudCommuneDepart->getId_nd_rte()
-            ])[0]->getGid();
-            $noeudRoutierArriveeGid = (new NoeudRoutierRepository)->recupererPar([
-                "id_rte500" => $noeudCommuneArrivee->getId_nd_rte()
-            ])[0]->getGid();
+            $noeudCommuneDepartGid = (new NoeudCommuneRepository)->recupererPar(["nom_comm" => $_POST["nomCommuneDepart"]])[0]->getGid();
+            $noeudCommuneArriveeGid = (new NoeudCommuneRepository)->recupererPar(["nom_comm" => $_POST["nomCommuneArrivee"]])[0]->getGid();
             $gids = [];
-            $gids[0] = $noeudRoutierDepartGid;
-            $gids[1] = $noeudRoutierArriveeGid;
+            $gids[0] = $noeudCommuneDepartGid;
+            $gids[1] = $noeudCommuneArriveeGid;
             echo(json_encode($gids));
         }
     }
