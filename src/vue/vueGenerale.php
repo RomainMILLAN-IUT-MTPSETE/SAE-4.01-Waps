@@ -21,7 +21,7 @@
                 <input type="hidden" name="controleur" value="noeudCommune">
                 <input type="text" name="search" id="search" placeholder="Rechercher"/>
             </form>
-            <a class="nav_a" href="controleurFrontal.php?action=plusCourtChemin&controleur=noeudCommune">Accueil</a>
+            <a class="nav_a" href="controleurFrontal.php?action=pcc&controleur=noeudCommune">Accueil</a>
             <a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=noeudCommune">Communes</a>
             <!--<a class="nav_a" href="controleurFrontal.php?action=afficherListe&controleur=utilisateur">Utilisateurs</a>-->
 
@@ -46,7 +46,7 @@
             <nav>
                 <div class="nav__mobile_row">
                     <a href="controleurFrontal.php?action=afficherListe&controleur=noeudCommune"><img src="../ressources/img/home.svg" alt="Icone home"><p>Communes</p></a>
-                    <a href="controleurFrontal.php?action=plusCourtChemin&controleur=noeudCommune"><img src="../ressources/img/carte.svg" alt="Icone carte"><p>Carte</p></a>
+                    <a href="controleurFrontal.php?action=pcc&controleur=noeudCommune"><img src="../ressources/img/carte.svg" alt="Icone carte"><p>Carte</p></a>
                     <?php
                     if(ConnexionUtilisateur::estConnecte()){
                         $loginHTML = htmlspecialchars(ConnexionUtilisateur::getLoginUtilisateurConnecte());
@@ -68,7 +68,7 @@
             <a href="#" class="nav__mobile_close" id="nav__mobile_close_menu"><img src="../ressources/img/mobilemenuclose.svg" alt="Icone menu close"></a>
         </div>
         <div class="nav__mobile">
-            <a href="controleurFrontal.php?action=plusCourtChemin&controleur=noeudCommune"><img src="../ressources/img/icone.svg" alt="Icone Waps"></a>
+            <a href="controleurFrontal.php?action=pcc&controleur=noeudCommune"><img src="../ressources/img/icone.svg" alt="Icone Waps"></a>
             <a href="#"><img onclick="" id="nav__mobile_open_menu" src="../ressources/img/mobilemenu.svg" alt="Icone Waps"></a>
         </div>
     </header>
