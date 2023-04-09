@@ -9,7 +9,7 @@
     <div class="detailCommune-content">
         <p>Nom chef: <?= $noeudCommune->getNomChf() ?></p>
         <p>Statut: <?= $noeudCommune->getStatus() ?></p>
-        <p>Superficie: <?= $noeudCommune->getSuperfecie() ?></p>
-        <p>Population: <?= $noeudCommune->getPopulation() ?></p>
+        <p>Superficie: <?= $noeudCommune->getSuperfecie() ?> m2</p>
+        <p>Population: <?= $noeudCommune->getPopulation() ?> habitants</p>
     </div>
 </div>
