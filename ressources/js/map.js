@@ -17,6 +17,7 @@ var allLayers = L.layerGroup().addTo(map);
 
 submitButton.addEventListener(`click`, (e) => {
     e.preventDefault();
+    submitButton.disabled = true;
     const nomCommuneDepart = inputCommuneDepart.value;
     const nomCommuneArrivee = inputCommuneArrivee.value;
     if (nomCommuneArrivee.value !== "" && nomCommuneArrivee.value !== "") {
@@ -30,6 +31,7 @@ submitButton.addEventListener(`click`, (e) => {
                 let endTime = new Date();
                 duration = (endTime - startTime) / 1000;
                 callbackPCC(xhr);
+                submitButton.disabled = false;
             }else{
                 console.log('Error');
             }
