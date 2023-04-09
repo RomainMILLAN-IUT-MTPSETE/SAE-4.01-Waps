@@ -42,7 +42,7 @@ class PlusCourtChemin {
             if ($noeudRoutierGidCourant === $noeudRoutierArriveeGid){ 
                 return [
                     'distances' => $this->distances[$noeudRoutierGidCourant],
-                    'parcours' => $parcours
+                    'parcours' => array_reverse($parcours)
                 ];
             }
             $voisins = $this->noeudRoutierRepository->getVoisins($noeudRoutierGidCourant);
