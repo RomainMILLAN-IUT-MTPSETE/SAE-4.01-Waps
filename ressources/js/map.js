@@ -52,7 +52,7 @@ function callbackPCC(xhr) {
             gids = JSON.parse(xhr3.responseText);
             console.log(gids[0]);
             console.log(gids[1]);
-            p.innerHTML = `Le trajet entre <a href="controleurFrontal.php?controleur=noeudCommune&action=afficherDetail&gid=${gids[0]}">${data.nomCommuneDepart}</a> et <a href="controleurFrontal.php?controleur=noeudCommune&action=afficherDetail&gid=${gids[1]}">${data.nomCommuneArrivee}</a> mesure ${(data.distance).toFixed(2)} km.`;
+            p.innerHTML = `Le trajet entre <a target="_blank" href="controleurFrontal.php?controleur=noeudCommune&action=afficherDetail&gid=${gids[0]}">${data.nomCommuneDepart}</a> et <a target="_blank" href="controleurFrontal.php?controleur=noeudCommune&action=afficherDetail&gid=${gids[1]}">${data.nomCommuneArrivee}</a> mesure ${(data.distance).toFixed(2)} km.`;
             divResults.appendChild(p);
             let p2 = document.createElement('p');
             p2.innerHTML = `Le calcul du trajet a duré ${duration.toFixed(2)} secondes.`;
