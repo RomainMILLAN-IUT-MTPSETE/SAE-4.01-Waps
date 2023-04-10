@@ -1,6 +1,7 @@
 const apiKey = `b8e14ab0ce63c957c8ddcb5c79a9a25b`;
 const nomVille = document.getElementById('nomVille').innerHTML;
 const container = document.getElementById('detailCommune-container');
+const content = document.getElementById("detailCommune-content")
 
 window.onload = () => {
     afficheMeteo();
@@ -17,12 +18,10 @@ function afficheMeteo() {
 			let meteo = weather[0].description;
 			meteo = meteo.charAt(0).toUpperCase() + meteo.slice(1);
 			const div = document.createElement(`div`);
-			div.innerHTML = `
-        		<h2>Ville: ${name}, ${sys.country}</h2>
+			content.innerHTML += `
+				<p>Météo: ${meteo} <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="${meteo}"></p>
         		<p>Température: ${Math.round(main.temp)}°C</p>
 				<p>Ressenti: ${Math.round(main.feels_like)}°C</p>
-				<img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="${meteo}">
-				<p>Météo: ${meteo}</p>
 				<p>Lever du soleil: ${new Date(sys.sunrise * 1000).toLocaleTimeString('fr-FR')}</p>
 				<p>Coucher du soleil: ${new Date(sys.sunset * 1000).toLocaleTimeString('fr-FR')}</p>
       		`;

@@ -6,7 +6,7 @@
 <div class="detailCommune-container" id="detailCommune-container">
     <h2 id="nomVille"><?= $noeudCommune->getNomCommune() ?></h2>
 
-    <div class="detailCommune-content">
+    <div class="detailCommune-content" id="detailCommune-content">
         <p>Nom chef: <?= $noeudCommune->getNomChf() ?></p>
         <p>Statut: <?= $noeudCommune->getStatus() ?></p>
         <p>Superficie: <?= $noeudCommune->getSuperfecie() ?> m2</p>

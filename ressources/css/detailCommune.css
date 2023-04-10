@@ -34,6 +34,14 @@
     font-weight: lighter;
     margin: 0;
     margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+.detailCommune-content p img{
+    height: 25px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 @media (max-width: 750px){
