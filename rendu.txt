@@ -1,22 +1,32 @@
 SAE 4.01 - Waps (MILLAN/TREGUIER/CHARRADE/PIERRE/CALAS)
 
 Répartition du travail par élève:
+(Les points énoncés sont les points sur lesquels les personnes ont le plus travaillé.
+Toutes les personnes ont travaillé sur tous les aspects du projet.)
 
  MILLAN Romain (22.5%)
-  - Stylisage du site
   - Compte utilisateur
+  - Stylisage du site
+  - Ecriture du rapport
+  - Création de la maquette
 
  TREGUIER Ewan (22.5%)
   - Création de la maquette
+  - Stylisage du site
+  - Ecriture du rapport
   - Compte utilisateur
 
  CHARRADE Hugo (22.5%)
   - Optimisation de l'algorithme
   - Optimisation de la Base de Données
+  - Affichage de la map
+  - Ecriture du rapport
 
  PIERRE Goeffrey (22.5%)
   - Optimisation de la Base de Données
   - Optimisation de l'algorithme
+  - Autocompletion
+  - Ecriture du rapport
 
  CALAS Mathéo (10.0%)
-  - Stylisage du site
+  - Rapport
