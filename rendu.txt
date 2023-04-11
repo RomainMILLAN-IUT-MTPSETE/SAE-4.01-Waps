@@ -8,7 +8,7 @@ Toutes les personnes ont travaillé sur tous les aspects du projet.)
   - Compte utilisateur
   - Stylisage du site
   - Ecriture du rapport
-  - Création de la maquette
+  - Configuration des containeurs Docker
 
  TREGUIER Ewan (22.5%)
   - Création de la maquette
