@@ -30,3 +30,5 @@ Toutes les personnes ont travaillé sur tous les aspects du projet.)
 
  CALAS Mathéo (10.0%)
   - Rapport
+
+ TOTAL: 100.0%
