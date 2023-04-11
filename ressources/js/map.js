@@ -4,6 +4,7 @@ const inputCommuneDepart = document.getElementById('nomCommuneDepart_id');
 const inputCommuneArrivee = document.getElementById('nomCommuneArrivee_id');
 const submitButton = document.getElementById('button');
 const divResults = document.getElementById('resultat');
+//const calcul_img = document.getElementById("calcul_img");
 let duration;
 let trajet;
 let markerDepart;
@@ -18,6 +19,9 @@ var allLayers = L.layerGroup().addTo(map);
 submitButton.addEventListener(`click`, (e) => {
     e.preventDefault();
     submitButton.disabled = true;
+    submitButton.textContent = "Calcul en cours ...";
+    submitButton.style.backgroundColor = "#4E3489";
+    submitButton.style.width = "250px";
     const nomCommuneDepart = inputCommuneDepart.value;
     const nomCommuneArrivee = inputCommuneArrivee.value;
     if (nomCommuneArrivee.value !== "" && nomCommuneArrivee.value !== "") {
@@ -30,6 +34,7 @@ submitButton.addEventListener(`click`, (e) => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let endTime = new Date();
                 duration = (endTime - startTime) / 1000;
+                console.log(xhr.responseText);
                 callbackPCC(xhr);
                 submitButton.disabled = false;
             }else{
@@ -54,6 +59,9 @@ function callbackPCC(xhr) {
     xhr3.onload = () => {
         if (xhr3.readyState === 4 && xhr3.status === 200) {
             gids = JSON.parse(xhr3.responseText);
+            submitButton.textContent = "Calculer";
+            submitButton.style.backgroundColor = "#744FC6";
+            submitButton.style.width = "150px";
             p.innerHTML = `Le trajet entre <a target="_blank" href="controleurFrontal.php?controleur=noeudCommune&action=afficherDetail&gid=${gids[0]}">${data.nomCommuneDepart}</a> et <a target="_blank" href="controleurFrontal.php?controleur=noeudCommune&action=afficherDetail&gid=${gids[1]}">${data.nomCommuneArrivee}</a> mesure ${(data.distance).toFixed(2)} km.`;
             divResults.appendChild(p);
             let p2 = document.createElement('p');

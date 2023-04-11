@@ -64,6 +64,9 @@
     border: 0px;
     border-radius: 5px;
 }
+.choose form .Input-submit .calcul_img{
+    display: none;
+}
 
 .autoCompletionDepart{
     background-color: white;
