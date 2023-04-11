@@ -61,7 +61,7 @@ CREATE TABLE utilisateur (
 );
 
 insert into utilisateur (login, nom, prenom, mdp_hache, est_admin, email, email_a_valider, nonce)
-values (1, 'DEV', 'DEV', '', '0', '', '', '');
+values (1, 'Waps', 'Developpeur', '', '0', 'dev@waps.fr', '', '');
 
 create materialized view noeud_routier_mt as
 SELECT nr.gid,
