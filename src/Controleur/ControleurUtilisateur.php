@@ -256,7 +256,7 @@ class ControleurUtilisateur extends ControleurGenerique
         }
         ConnexionUtilisateur::deconnecter();
         MessageFlash::ajouter("success", "L'utilisateur a bien été déconnecté.");
-        ControleurUtilisateur::rediriger("noeudCommune", "plusCourtChemin");
+        ControleurUtilisateur::rediriger("home", "accueil");
     }
 
     public static function validerEmail()
